@@ -1,0 +1,196 @@
+---
+title: "DATA1001 Lab10 Worksheet"
+subtitle: "Hypothesis Testing: Proportion Test"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+```{r}
+# install.packages("devtools")
+#devtools::install_github("ropenscilabs/icon")
+```
+
+# `r icon::fa("crosshairs")` Aim {-}
+
+At the end of this Worksheet, you should be able to:
+
+- use the "Box Model" and the Hypothesis Testing framework to perform a Proportion Test, using the Sanple **Sum**.
+- interpret p-values.
+
+
+<br>
+
+**Recap on the "Hypothesis Testing" framework**
+
+- See [Lecture](http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/lectures/28.HypothesisTesting.html) and [Lecture](http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/lectures/29.ProportionTest.html).
+
+- The structure of a hypothesis test is H A T P C.
+
+- For a box model contructed around a certain null hypothesis, the **observed value of the test statistic** is **(observed value - expected value)/SE**, 
+
+where the observed value is calculated from the sample and the EV and SE are calculated from the box model.
+
+<br>
+
+**Hints:** 
+
+- Draw the HATPC scaffold for your scenario and apply the box model
+
+<br><br>
+
+# Have a go
+
+- Explain the structure of a hypothesis test using an annotated diagram, and example.
+
+<br><br><br><br>
+
+- In your own words, explain what a p-value is.
+
+
+<br><br>
+
+# `r icon::fa("pills")` Probiotic treatment for peanut allergy  
+
+A team from [Murdoch](https://www.abc.net.au/news/2017-08-17/new-peanut-allergy-treatment-longlasting-study-says/8814264) has been studying long-term clinical and immunological effects of probiotic and peanut oral immunotherapy after treatment cessation. The trial consisted of a 4-year follow-up of a randomised, double-blind, placebo-controlled trial. In the Treatment group, 26 of the 29 patients showed improvement ("desensitisation").
+
+It is claimed that *more* than 80% of people respond to the treatment. Test this hypothesis.
+
+## Preparation
+
+Draw a simple box model, with any population and sample details identified.
+
+<br><br><br><br><br><br><br><br><br><br>
+
+## Hypothesis Test
+
+
+### H {-}
+
+- Write down the null and alternative hypotheses.
+
+Ho:  The proportion of patient who respond to the treatment ("desensitise to peanut allergy") is _______
+
+H1: The proportion of patient who respond to the treatment ("desensitise to peanut allergy") is *more than* _______
+
+- Add the null hypothesis to the box model above, with the specific proportions of 1 and 0 in the box. Calculate the mean and SD of the box.
+
+
+### A {-}
+
+Write down any assumptions.
+
+### T {-}
+
+- For a sample of size 29 from the box, what is the expected value (EV) and standard error (SE) of the **Sum** of the sample?
+
+<br><br>
+
+- What is the formula for the test statistic?
+
+- What is the observed value of the test statistic?
+
+
+### P {-}
+
+Assuming a Normal curve to model the **Sum** of the sample, what is the approximate p-value?
+
+<br><br>
+
+### C {-}
+
+What is the conclusion?  
+
+<br><br>
+
+
+
+
+
+
+
+<br><br>
+
+# `r icon::fa("bitbucket")` Pepsi and Coke  
+
+In a market research study, 1000 people were given a sample of both Coke and Pepsi (in a random order) and asked which they prefered in taste. 52% of people preferred Coke. Researchers calculated a p-value of 0.19.
+
+It is claimed that there is *no difference* in people's preference for Coke and Pepsi. Test this hypothesis.
+
+## Preparation
+
+Draw a simple box model, with any population and sample details identified.
+
+<br><br><br><br><br><br><br><br><br><br>
+
+## Hypothesis Test
+
+
+### H {-}
+
+- Write down the null and alternative hypotheses.
+
+Ho:  The proportion of people who prefer Coke over Pepsi is _______
+
+H1: The proportion of people who prefer Coke over Pepsi is *not* _______
+
+- Add the null hypothesis to the box model above, with the specific proportions of 1 and 0 in the box. Calculate the mean and SD of the box.
+
+
+### A {-}
+
+Write down any assumptions.
+
+### T {-}
+
+- For a sample of size 1000 from the box, what is the expected value (EV) and standard error (SE) of the **Sum** of the sample?
+
+- What is the formula for the test statistic?
+
+- What is the observed value of the test statistic?
+
+
+### P {-}
+
+Assuming a Normal curve to model the **Sum** of the sample, what is the approximate p-value?
+
+<br><br>
+
+### C {-}
+
+What is the conclusion?  
+
+<br><br>
+
+
+# `r icon::fa("uber")` Uber 
+
+[Uber](www.uber.com/en-AU/cities/sydney/) is comparing customer satisfaction in Sydney over the past month, compared to the historical average of 80% satisfaction. This month, 948 of 1,200 Sydney customers were happy.
+
+Is there *any difference* between this month's Uber satisfation and the *historical amount*? Perform a hypothesis test using the Sample Sum.
+
+<br><br>
+
+Note: All these questions could have been solved using the Sample **Mean** instead of the Sample **Sum**. Have a go.

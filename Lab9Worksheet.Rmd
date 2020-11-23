@@ -1,0 +1,50 @@
+---
+title: "DATA1001 Lab9 Worksheet"
+subtitle: "Sample Surveys"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+<br>
+
+# <i class="fa fa-crosshairs"></i> Aim {-}
+
+At the end of this Worksheet, you should be use statistical thinking to devise a sample survey, and then apply the box model.
+
+<br>
+
+# <i class="far fa-sun"></i> Climate change {-}
+
+Suppose you wanted to conduct a survey on the opinion of Sydney students on climate change.
+
+- Propose a question.
+- What is the population and sample?
+- What is the parameter of interest?
+- What collection method would you use and why?
+- What are possible sources of bias?
+- Draw the box model.
+
+

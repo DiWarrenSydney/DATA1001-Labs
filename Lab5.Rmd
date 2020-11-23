@@ -1,0 +1,199 @@
+---
+title: "DATA1001/1901 Lab5"
+subtitle: "Linear Model"
+author: "© University of Sydney 2020"
+output:
+  html_document:
+    theme: flatly
+    number_sections: yes
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    code_folding: show
+---
+
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+# Live Demo
+
+We will demonstrate linear modelling.
+
+```{r}
+# Consider the iris data
+dim(iris)
+str(iris)
+```
+
+## Research Question: Is there a linear relationship between Petal Width (x) and Petal Length (y)?
+
+Note: Your research question concerning a linear model should involve 2 quantitative variables.
+
+```{r}
+# Step1: Construct a scatter plot
+plot(iris$Petal.Width,iris$Petal.Length)    # Note the order: plot(x,y)
+
+# Step2: Calculate the linear regression model and draw on the scatter plot
+L=lm(iris$Petal.Length ~ iris$Petal.Width)    # Note the order: lm(y ~ x)
+summary(L)
+L$coeff
+abline(L)
+
+# Step3: Calculate the (linear) correlation coefficient
+cor(iris$Petal.Width,iris$Petal.Length)    # Note the order doesn't matter :)
+
+# Step4: Construct the residual plot (diagnostic)
+plot(iris$Petal.Width, L$residuals, xlab = "Petal Width", ylab = "Residuals")
+abline(h = 0, col = "blue")
+
+# Step5 (If appropriate): Predict the Petal Length of an iris with Petal Width of 2
+unname(L$coeff[1]) + unname(L$coeff[2])*2
+```
+
+Conclusion: 
+
+- There appears to be a very strong linear relationship between Petal Width (x) and Petal Length (y), indicated by the trend on the scatter plot, the correlation coefficient of 0.96 and the random scatter of the residual plot.
+
+- The linear model is: y = 1.08 + 2.23 x (to 2 dp), where x = Petal Width and y = Petal Length.
+
+- Hence, if we were given an iris with Petal Width 2, we could predict it's Petal Length to be y = 1.08 + 2.23*2 = 5.54.
+
+- However, there is a curious 'gap' between Petal Widths of 0.6 and 1. See the answer below, when we add an extra qualitative variable (Species) to the scatterplot.
+
+<br>
+
+Now let's try in ggplot!
+
+```{r, message= FALSE}
+library(tidyverse)
+ggplot(iris, aes(x=Petal.Width, y = Petal.Length, colour = Species)) + geom_point()
+```
+
+<br><br>
+
+# Air Quality in Sydney 
+
+Have a go at linear regression yourself!
+
+## Data Story
+
+- The Sydney Air Quality dataset comes from [Environment NSW](http://www.environment.nsw.gov.au/AQMS/search.htm).
+
+```{r}
+air = read.csv("http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/data/AQI_July2015.csv")
+
+# IDA
+dim(air)
+str(air)
+```
+
+- According to this [AQI Info](http://www.health.nsw.gov.au/environment/air/Pages/aqi.aspx), what is the AQI? What does it measure? Why is it important?
+
+- Check out this scary [visualisation](http://aqicn.org/map/). What stands out?   
+
+<br>
+
+## What day had the worst air quality? 
+
+```{r}
+summary(air)
+```
+
+<br>
+
+## Which region has the best air quality?
+
+```{r}
+boxplot(air$SydneyCEAQI,air$SydneyNWAQI)
+```
+
+<br>
+
+## Is there a linear relationship between the air quality in the 2 regions?
+
+```{r}
+# Step1: Construct a scatter plot
+
+# Step2: Calculate the linear regression model and draw on the scatter plot
+
+# Step3: Calculate the (linear) correlation coefficient
+
+# Step4: Construct the residual plot (diagnostic)
+
+# Step5 (If appropriate): Predict the air quality in NW Sydney on a day when the air quality in CE Sydney is 120
+```
+
+<br><br>
+
+# Olympic 100m sprint 
+
+## Data Story
+
+- The 100m men's sprint is considered once of the most prestigous events at each Olympics. Who holds the current record, and for what time? See
+[Olympic times](https://www.olympic.org/athletics/100m-men.
+
+- Study the following code, and then fill in the research questions it is answering. What did you discover?
+
+```{r}
+## IDA
+olympics = read.csv("http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/data/Olympics100m.csv")
+dim(olympics)
+str(olympics)
+```
+
+## Research Questions
+
+- Study the following code. Fill in the research questions it is answering. What did you discover?
+
+```{r}
+## RQ1: <fill in> 
+Men = olympics$Time[olympics$Gender=="male"]
+max(Men)
+
+## RQ2: <fill in>
+Women = olympics$Time[olympics$Gender=="female"]
+min(Women)
+
+## RQ3: <fill in>
+plot(table(olympics$Country),las=2)
+
+## RQ4: <fill in>
+Year = olympics$Year[olympics$Gender=="male"]
+plot(Year,Men)
+cor(Year,Men)
+lm(Men~Year)
+```
+
+- Note if you try to regress the men's winning time on women's winning time for each year, you get an error message. Why? 
+
+```{r,eval=F}
+L=lm(Men~Women)
+length(Men)
+length(Women)
+```
+
+Here's a possible solution.
+```{r}
+# Make the Men's data the same length as Women, by starting from 1928
+Men1 = olympics$Time[olympics$Gender == "male" & (olympics$Year > 1927)]
+plot(Women, Men1, main = "100m winning times from 1928", xlab = "Women's Times (s)", ylab = "Men's Times (s)")
+L1 = lm(Men1 ~ Women)
+abline(L1, col = "green")
+```
+
+
+```{r}
+# Now we do in ggplot
+library(tidyverse)
+olympics %>% filter(Year  > 1927)  %>% select(Year, Time, Gender) %>% ggplot(aes(x=Year, y = Time, colour = Gender)) + geom_point()
+```
+

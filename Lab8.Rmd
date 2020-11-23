@@ -1,0 +1,224 @@
+---
+title: "DATA1001/1901 Lab8"
+subtitle: "Chance Variability"
+author: "© University of Sydney 2020"
+output:
+  html_document:
+    theme: flatly
+    number_sections: yes
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    code_folding: show
+---
+
+# Live Demo: Simulations
+
+
+We will use the same boxes from the Lab 8 Worksheet, so you can compare your results,
+
+## Box1
+
+What we know:
+
+- A box contains 1,2,3. This is the population.
+- We draw 25 times from the box, with replacement. This forms the sample.
+- We are interested in the properties of the **Sum** of the 25 draws. 
+
+How to model in R:
+
+```{r, eval=F}
+# Step1: Define the box
+box=c(1,2,3)
+
+# Step2: alcuate the Mean and SD of the box
+mean(box)
+library(multicon)
+popsd(box) 
+
+# Step3: Calculate the EV and SE of the SUM of the sample
+ev = 25 * mean(box)
+se = sqrt(25) * popsd(box)
+c(ev,se)    
+```
+
+Question: Using the appropriate normal approximation/curve estimate the chance that the sum of the sample is between  50 and  55 (inclusive). 
+
+First, work out the standard units, and draw the standard Normal curve. Calculate the probability from this curve, from your knowledge of the properties of a Normal curve, or using R.
+
+```{r, eval=F}
+su1 = (50-ev)/se
+su2 = (55-ev)/se
+pnorm(su2)-pnorm(su1)
+
+# Quicker way
+pnorm(55,ev,se)-pnorm(50,ev,se)
+
+## Adjust your calculation, using the continuity correction?  Why do we use it?
+pnorm(49.5,ev,se)-pnorm(55.5,ev,se)
+```
+
+
+<br>
+
+## Box 2
+
+- A box contains 1,2,3,4,5,6. This is the population.
+- We draw 16 times from the box, with replacement. This forms the sample.
+- We are interested in the properties of the **Mean** of the 16 draws. 
+
+How to model in R:
+
+```{r, eval=F}
+# Step1: Define the box
+box=c(1,2,3,4,5,6)
+
+# Step2: Calculate the Mean and SD of the box
+mean(box)
+library(multicon)
+popsd(box) 
+
+# Step3: Calculate the EV and SE of the MEAN of the sample
+ev = mean(box)
+se = popsd(box)/sqrt(16)
+c(ev,se)    
+```
+
+<br>
+
+
+
+
+# <i class="fas fa-cog"></i> Simulate the CLT 
+
+## Experiment with the CLT
+
+- Experiment with the [Seeing Theory: CLT](https://students.brown.edu/seeing-theory/probability-distributions/index.html) app.
+- In your own words, define the CLT in a sentence.
+
+## Think about the CLT
+In which of the following scenarios could the CLT be applied to the sample sum or sample mean? Justify your answer.
+
+- We extract samples of size 1 from a symmetric distribution.
+- We extract samples of size 30 from a symmetric distribution.
+- We extract samples of size 30 from an asymmetric distribution.
+- We extract 100 samples from an asymmetric distribution.
+
+## Simulate simple box (symmetric)
+
+Experiment to find out what minimum size number of draws it takes, for the distribution of the sample sum to start looking like a Normal curve.
+
+Method: Use `replicate` to simulate 1000 samples of 10 draws (and then 100 draws) from a 0,1 box, and compare your results.
+
+- Take 10 draws from 0,1 box [1000 replicates]
+```{r,results='hide',fig.show='hide'}
+set.seed(1)
+box=c(0,1)
+totals = replicate(1000, sum(sample(box, 10, rep = T)))
+table(totals)
+mean(totals)
+sd(totals)
+hist(totals,nclass=20)
+```
+
+- Take 100 draws from 0,1 box [1000 replicates]
+```{r,results='hide',fig.show='hide'}
+set.seed(1)
+box=c(0,1)
+totals = replicate(1000, sum(sample(box, 100, rep = T)))
+table(totals)
+mean(totals)
+sd(totals)
+hist(totals,nclass=20)
+```
+
+## Simulate assymetric box
+
+Experiment to find out what minimum size number of draws it takes, for the distribution of the sample sum to start looking like a Normal curve.
+
+- Take 10 draws from 0,1,1,1,1,1,1 box [1000 replicates]
+```{r,results='hide',fig.show='hide'}
+set.seed(1)
+box=c(0,1,1,1,1,1,1)
+totals = replicate(1000, sum(sample(box, 10, rep = T)))
+table(totals)
+mean(totals)
+sd(totals)
+hist(totals,nclass=20)
+```
+
+- Take 100 draws from 0,1,1,1,1,1,1 box [1000 replicates]
+```{r,results='hide',fig.show='hide'}
+set.seed(1)
+box=c(0,1,1,1,1,1,1)
+totals = replicate(1000, sum(sample(box, 100, rep = T)))
+table(totals)
+mean(totals)
+sd(totals)
+hist(totals,nclass=20)
+```
+
+
+# DATA 1901
+
+**Question:** Use the Central Limit Theorem (CLT) to generate values of a standard Normal distribution from the sum of uniform random variables.
+
+## Uniform Distribution
+
+- Suppose we have a sequence of independent random variables 
+$X_{1}, X_{2} , \ldots, X_{12}$ which have a uniform distribution between 0 and 1. Formally, we write $X_{i} \sim U(0,1)$ (for $i = 1,2,\ldots 12$)
+
+- By symmetry, it is clear that the mean of each random variable is $\frac{1}{2}$ and we can show formally that the variance (SD^2) is $\frac{1}{12}$.
+
+- Simulate the distribution of each random variable as follows:
+
+```{r}
+# Simulate and plot U[0,1]
+x = runif(10000,0,1)
+hist(x, prob=T)
+mean(x) # Compare 1/2
+sd(x)^2   # Compare 1/12
+```
+
+## Sum of 12 Uniforms U[0,1]
+
+- Consider the sum $S = \sum_{i=1}^{12} X_{i}$.
+
+- By the CLT we could propose that $S$ has approximately a Normal distribution, with mean $12 \times \frac{1}{2} = 6$ and variance $12 \times \frac{1}{12} = 1$, giving a SD of 1.
+
+- Hence, $S - 6$ will approximately be a standard Normal N(0,1).
+
+- Let's see how good the approximation is.
+
+```{r}
+# Simple nested code
+sminus6 = replicate(1000, sum(runif(12,0,1))) - 6
+hist(sminus6)
+mean(sminus6)
+sd(sminus6)
+qqnorm(sminus6, main=paste("QQ plot of Sums of size 1000"))
+qqline(sminus6, col="green") 
+```
+
+- Now experiment using a function for simulation.
+
+```{r}
+# Using functions to allow choice of parameters in simulation and sim
+
+sreps= rep(0,1000)  # empty reps variable as starting point
+
+for(i in 1:1000)    # function to generate 1000 simulations
+  {
+x = runif(12,0,1)   # 12 U[0,1]
+s = sum(x)          # sum of 12 U[0,1]     
+sreps[i] = s -6     # s - 6
+}
+# return(sreps)
+
+## Results
+hist(sreps)
+mean(sreps)
+sd(sreps)
+qqnorm(sreps, main=paste("QQ plot of Sums of size 1000"))
+qqline(sreps, col="green") 
+```

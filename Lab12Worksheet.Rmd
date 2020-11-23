@@ -1,0 +1,62 @@
+---
+title: "DATA1001 Lab12 Worksheet"
+subtitle: "Tests for Relationships"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+# <i class="fa fa-crosshairs"></i> Aim {-}
+
+At the end of this Worksheet, you should be able to perform a chi-squared test (by hand and using R) and interpret output for a regression test.
+
+
+<br>
+
+# Uber preference
+
+A study was conducted on student's usage on Uber.
+
+|Category|Domestic|International|TotaL|
+|----|----|----|----|
+|Uses Uber|15|23|38|
+|Doesn't use Uber|17|6|23|
+|Total|22|29|51|
+
+Is there a connection between Background (Domestic or International) and Uber usage?
+Use a chi-squared test.  Work out by hand, and then perform in R.
+
+<br>
+
+# Air Quality in Sydney
+
+Using the following output, is there a linear relationship between AQI in CE and NW Sydney?
+
+```{r}
+air = read.csv("http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/data/AQI_July2015.csv")
+str(air)
+summary(lm(SydneyNWAQI ~ SydneyCEAQI, air))
+```
+

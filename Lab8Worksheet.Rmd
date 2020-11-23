@@ -1,0 +1,244 @@
+---
+title: "DATA1001 Lab8 Worksheet"
+subtitle: "Chance Variability (The Box Model)"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+<br>
+
+# <i class="fa fa-crosshairs"></i> Aim {-}
+
+At the end of this Worksheet, you should be able to draw a "box model" for a given random experiment, and calculate the EV, SE and Normal probabilities for the Sum and Mean of the draws.
+
+<br>
+
+**Recap on the "Box model"**
+
+- See [Lecture23](http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/lectures/23.TheBoxModel.html#1).
+
+- The "box" represents the population, and the $n$ draws represents thes sample.
+
+- Unless otherwise stated, we assume the draws are made with replacement from the box.
+
+- Take a box with a certain mean and SD. Take $n$ draws to form a sample. The following results follow:
+
+|Focus|Expected Value (EV)|Standard Error (SE)|
+|------------|------------|--------------|
+|Sum of the Sample| $n \times$ Mean of the Box | $\sqrt{n} \times$ SD of the Box |
+|Mean of the Sample| Mean of the Box  | SD of the Box / $\sqrt{n}$|
+
+- If we prefer symbols, we can call the mean and SD of the box $\mu$ and $\sigma$ respectively, then we can write:
+
+|Focus|Expected Value (EV)|Standard Error (SE)|
+|------------|------------|--------------|
+|Sum of the Sample| $n \mu$|$\sqrt{n} \sigma$ |
+|Mean of the Sample|$\mu$|$\sigma$ / $\sqrt{n}$|
+
+<br>
+
+**Hints:** 
+
+- Draw the scaffold for the box model, and fill in the details.
+- Check whether you are being asked about the **Sum** OR **Mean** of the draws.
+- Use the results above.
+
+<br>
+**When you finish:** Upload your answers to the Lab10 link on [Ed](https://edstem.org/courses/3894/discussion/).
+
+<br><br>
+
+# Have a go
+
+Explain the Box Model by an annotated diagram, and example.
+
+<br><br>
+
+# Scenarios
+
+## Box1
+
+What we know:
+
+- A box contains 1,2,3. This is the population.
+- We draw 25 times from the box, with replacement. This forms the sample.
+- We are interested in the properties of the **Sum** of the 25 draws. 
+
+<br>
+
+(i) Draw the box model, by hand.
+
+<br><br><br>
+
+
+(ii) Use the box model.
+
+The **Sum** of the sample has:
+
+- EV = $n \times$ Mean of the Box = 25 x mean = 
+- SE =$\sqrt{n} \times$ SD of the Box  = 5 x SD = 
+
+(iii) Simulate 2 samples, and see how the 2 **Sums** compare to the EV.
+
+```{r}
+# sample 1
+set.seed(5)
+box=c(1,2,3)
+sample = sample(box, 25, replace = T)
+table(sample)
+sum(sample)
+
+# sample 2
+set.seed(10)
+box=c(1,2,3)
+sample = sample(box, 25, replace = T)
+table(sample)
+sum(sample)
+```
+
+
+(iv) Now replicate 10000 samples, and see how the histogram of **Sums** matches up with the EV and SE.
+
+```{r}
+# replicate 10000 samples, and calculate 10000 sums
+set.seed(10)
+box=c(1,2,3)
+totals = replicate(10000, sum(sample(box, 25, replace = T)))
+hist(totals)
+## compare the simulation mean and SD to the EV and SE of the model.
+mean(totals)
+sd(totals)
+```
+
+<br>
+
+## Box2
+
+- A box contains 1,2,3,4,5,6. This is the population.
+- We draw 16 times from the box, with replacement. This forms the sample.
+- We are interested in the properties of the **Mean** of the 16 draws. 
+
+
+<br>
+
+(i) Draw the box model, by hand.
+
+<br><br><br>
+
+(ii) Use the box model.
+
+The **Mean** of the sample has:
+
+- EV = Mean of the Box = 
+- SE = SD of the Box / $\sqrt{n}$   = 
+
+(iii) Simulate 2 samples, and see how the 2 **Means** compare to the EV.
+
+```{r}
+# sample 1
+set.seed(5)
+box=c(1,2,3,4,5,6)
+sample = sample(box, 16, replace = T)
+table(sample)
+mean(sample)
+
+# sample 2
+set.seed(10)
+sample = sample(box, 16, replace = T)
+table(sample)
+mean(sample)
+```
+
+
+(iv) Now replicate 10000 samples, and see how the histogram of **Means** matches up with the EV and SE.
+
+```{r}
+# replicate 1000 samples, and calculate 1000 sums
+set.seed(10)
+box=c(1,2,3,4,5,6)
+totals = replicate(1000, mean(sample(box, 16, replace = T)))
+hist(totals)
+## compare the simulation mean and SD to the EV and SE of the model.
+mean(totals)
+sd(totals)
+```
+
+
+<br>
+
+## Have a go
+
+What we know:
+
+- A box contains 1,3,6. This is the population.
+- We draw 25 times from the box, with replacement. This forms the sample.
+- We are interested in the properties of the **Sum** of the 25 draws. 
+
+<br>
+
+(i) Draw the box model, by hand.
+
+<br><br><br>
+
+(ii) Use the box model.
+
+The **Sum** of the sample has:
+
+- EV = 
+- SE = 
+
+(iii) Simulate 2 samples, and see how the 2 **Sums** compare to the EV.
+
+```{r}
+```
+
+(iv) Now replicate 10000 samples, and see how the histogram of **Sums** matches up with the EV and SE.
+
+```{r}
+# replicate 10000 samples, and calculate 10000 sums
+set.seed(10)
+box=c(1,3,6)
+totals = replicate(10000, sum(sample(box, 25, replace = T)))
+hist(totals)
+## compare the simulation mean and SD to the EV and SE of the model.
+mean(totals)
+sd(totals)
+```
+
+<br>
+
+# <i class="far fa-sun"></i> Climate change
+
+Suppose you wanted to conduct a survey on the opinion of Sydney students on climate change.
+
+- Propose a question.
+- What is the population and sample?
+- What is the parameter of interest?
+- What collection method would you use and why?
+- What are possible sources of bias?
+- Draw the box model.
+
+

@@ -1,0 +1,32 @@
+---
+title: "DATA1001/1901 Lab12"
+subtitle: "Tests for relationships"
+author: "© University of Sydney 2020"
+output:
+  html_document:
+    theme: flatly
+    number_sections: yes
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    code_folding: show
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+<br>
+
+# Live Demo
+
+We will demonstrate a chi-squared test and regression test.
+
+

@@ -1,0 +1,374 @@
+---
+title: "DATA1001 Lab11 Worksheet"
+subtitle: "Tests for a Mean and Relationships"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+# <i class="fa fa-crosshairs"></i> Aim {-}
+
+At the end of this Worksheet, you should be able to:
+
+- use the "Box Model" and the Hypothesis Testing framework to perform a 1 sample Z or T Test.
+- use R Output from `t.test` to perform a 1 or 2 sample T Test.
+
+<br>
+
+**Recap on the 1 and 2 sample T Tests**
+
+- The structure of a hypothesis test is H A T P C.
+
+- See [Lecture](http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/lectures/33.ZandTtests.html) and [Lecture](http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/lectures/34.2SampleTTest.html).
+
+- For a box model contructed around a certain null hypothesis, the **observed value of the test statistic** is **(OV - EV)/SE**, where the OV is calculated from the sample and the EV and SE are calculated from the box model.
+
+-  For a 1 Sample Z or T Test, the null hypothesis is about the population **mean**, so we consider the Sample **Mean**, and the test statistic has a Z or T distribution respectively, depending on whether we know the population SD.
+
+Test|Test Statistic|P-value Curve|
+|---|------------------------|------|
+|Z| $\frac{\mbox{observed mean - population mean}}{\mbox{population SD}/\sqrt{n}}$|Normal|
+|T| $\frac{\mbox{observed mean - population mean}}{\mbox{sample SD}/\sqrt{n}}$|$t_{n-1}$|
+
+- Most commonly, we use the T Test. The easiest way is to use `t.test()` in R, which calculates the test statistics and p-values.
+
+<br>
+**When you finish:** Upload your answers to the Lab12 link on [Ed](https://edstem.org/courses/3894/discussion/).
+
+<br><br>
+
+# Have a go
+
+Explain the structure of a T Test using an annotated diagram, and example.
+
+<br><br><br><br><br><br>
+
+
+<br><br>
+
+# `r icon::fa("bicycle")` Caffeine and endurance (1 Sample Z Test)
+
+A [study](https://www.ncbi.nlm.nih.gov/pubmed/7657415) considered caffeine effect's on endurance, with a double blind, random order administration of caffeine capsules for 9 elite cylists.  
+
+The following data is the time to exhaustion after  0 and 13 mg caffeine per kg body weight, with `cafdiff` representing the effect of caffeine on endurance. 
+
+Assume that we know the population SD is 12 mins, from a previous study.
+
+```{r}
+caf0 = c(36.05, 52.47, 56.55, 45.2, 35.25, 66.38, 40.57, 57.15, 28.34)  # no caffeine (base-line endurance)
+caf13 = c(37.55, 59.3, 79.12, 58.33, 70.54, 69.47, 46.48, 66.35, 36.2)  # 13 mg caffeine per kg body weight
+cafdiff = caf13- caf0  # This represents the 'effect' of caffeine on endurance.
+cafdiff
+```
+
+Test the claim that caffeine does *not* affect endurance - ie the mean `cafdiff` is 0.
+
+Note:
+
+- We define "endurance" to be  "time to exhausation" here.
+- This is a 1 sample Z test, as we are using the 12 values in `cafdiff`, and we know the population SD = 12.
+
+## Preparation
+
+Draw a simple box model, with any population and sample details identified.
+
+<br><br><br><br><br><br><br><br><br><br>
+
+## Hypothesis Test
+
+
+### H {-}
+
+- Write down the null and alternative hypotheses.
+
+Ho:  The mean effect of caffeine on endurance (time to exhausation) is 0.
+
+H1:  The mean effect of caffeine on endurance is not 0.
+
+- Add the null hypothesis to the box model above, with the specific mean of the box. As we have the population SD, we can use the Z Test. 
+
+### A {-}
+
+Write down any assumptions.
+
+### T {-}
+
+- For a sample of size 12 from the box, what is the expected value (EV) and standard error (SE) of the **Mean** of the sample?
+
+```{r}
+n = 9
+ev = 0    # from Ho in box model
+se = 12/sqrt(n)
+```
+
+<br><br>
+
+- What is the formula for the test statistic?
+
+- What is the observed value of the test statistic?
+
+```{r}
+ov = mean(cafdiff)
+ts = (ov-ev)/se
+ts
+```
+
+### P {-}
+
+Using the Normal curve curve to model the **Mean** of the sample, what is the approximate p-value?
+
+```{r}
+2*pnorm(ts,lower.tail=F)
+```
+
+<br><br>
+
+### C {-}
+
+What is the conclusion?  
+
+<br><br>
+
+# `r icon::fa("bicycle")` Caffeine and endurance (1 Sample T Test)
+
+A [study](https://www.ncbi.nlm.nih.gov/pubmed/7657415) considered caffeine effect's on endurance, with a double blind, random order administration of caffeine capsules for 9 elite cylists.  
+
+The following data is the time to exhaustion after  0 and 13 mg caffeine per kg body weight, with `cafdiff` representing the effect of caffeine on endurance. 
+
+
+```{r}
+caf0 = c(36.05, 52.47, 56.55, 45.2, 35.25, 66.38, 40.57, 57.15, 28.34)  # no caffeine (base-line endurance)
+caf13 = c(37.55, 59.3, 79.12, 58.33, 70.54, 69.47, 46.48, 66.35, 36.2)  # 13 mg caffeine per kg body weight
+cafdiff = caf13- caf0  # This represents the 'effect' of caffeine on endurance.
+cafdiff
+```
+
+Test the claim that caffeine does *not* affect endurance - ie the mean `cafdiff` is 0.
+
+Note: Now, we do not know the population SD, so we will perform a 1 sample T Test.
+
+
+## Preparation
+
+Draw a simple box model, with any population and sample details identified.
+
+<br><br><br><br><br><br><br><br><br><br>
+
+## Hypothesis Test
+
+
+### H {-}
+
+- Write down the null and alternative hypotheses.
+
+Ho:  The mean effect of caffeine on endurance (time to exhausation) is 0.
+
+H1:  The mean effect of caffeine on endurance is not 0.
+
+- Add the null hypothesis to the box model above, with the specific mean of the box. As we do not have the population SD, we will use the T Test.
+
+
+### A {-}
+
+Write down any assumptions.
+
+### T {-}
+
+- For a sample of size 12 from the box, what is the expected value (EV) and standard error (SE) of the **Mean** of the sample?
+
+```{r}
+n = 9
+ev = 0    # from Ho in box model
+se = sd(cafdiff)/sqrt(n)
+```
+
+<br><br>
+
+- What is the formula for the test statistic?
+
+- What is the observed value of the test statistic?
+
+```{r}
+ov = mean(cafdiff)
+ts = (ov-ev)/se
+ts
+```
+
+### P {-}
+
+Using a $t_{11}$ curve curve to model the **Mean** of the sample, what is the approximate p-value?
+
+```{r}
+2*pt(ts,n-1, lower.tail=F)
+```
+
+
+<br><br>
+
+### C {-}
+
+What is the conclusion?  
+
+<br><br>
+
+The speedy way to do all this is:
+```{r}
+t.test(mu = 0, cafdiff)
+```
+
+<br><br>
+
+
+
+
+
+<br><br>
+
+# `r icon::fa("heartbeat")` Caffeine and endurance (2 Sample T Test)
+
+Consider the following data on heart rates (beats per minute), for 2 independent groups of Sydney students, collected 20 minutes after the 'RedBull' group had drunk a 250ml cold can of Red Bull.
+
+No_RB = 84,76,68,80,64,62,74,84,68,96,80,64,65,66
+
+RB = 72,88,72,88,76,75,84,80,60,96,80,84
+
+```{r, echo=F, warning=F, message=F}
+# Unequal length 2-sample T-Test
+
+No_RB = c(84,76,68,80,64,62,74,84,68,96,80,64,65,66)
+RB = c(72,88,72,88,76,75,84,80,60,96,80,84)
+
+# Create data frame
+RB_data <- data.frame(group = c(rep("No_RB",14), rep("RB",12)),rate = c(No_RB,  RB))
+```
+
+Test the claim that Redbull (caffeine) has an effect on heart rate
+
+Note: 
+- We are comparing 2 independent populations, so we will use a 2 sample T Test.
+- You can use the information given in `t.test`.
+
+```{r}
+No_RB = c(84,76,68,80,64,62,74,84,68,96,80,64,65,66)
+RB = c(72,88,72,88,76,75,84,80,60,96,80,84)
+t.test(No_RB, RB, var.equal = T)
+```
+
+## Preparation
+
+Draw a simple box model with the 2 populations and 2 samples, with any population and sample details identified.
+
+<br><br><br><br><br><br><br><br><br><br>
+
+## Hypothesis Test
+
+
+### H {-}
+
+- Write down the null and alternative hypotheses.
+
+Ho:  The mean difference between the heart rates of the 2 populations (with and without Red Bull) is 0.
+
+H1:  The mean difference between the heart rates of the 2 populations (with and without Red Bull) is not 0.
+
+- Add the null hypothesis to the box model above, with the specific mean difference of the boxes.
+
+### A {-}
+
+Write down any assumptions.
+
+### T {-}
+
+From the R Output, what is the observed value of the test statistic?
+
+### P {-}
+
+From the R Output, what is the p-value?
+
+<br><br>
+
+### C {-}
+
+What is the conclusion?  
+
+<br><br>
+
+## Diagnostic checks for the assumptions
+
+**A1. The 2 samples are independent**
+
+Given in context.
+
+<br>
+
+
+**A2. The 2 populations have equal spread (SD/variance)**
+
+```{r, echo = F, fig.height= 3, warning=FALSE}
+require(ggplot2)
+
+p2 <- ggplot(RB_data, aes(x = group, y = rate)) +
+  geom_boxplot(fill = c(2,3), colour = 1) +
+  xlab("Group") +
+  ylab("Heart rate (bpm)") +
+  ggtitle("Boxplot of effect of Red Bull on student heart rate")
+p2
+```
+
+```{r}
+var.test(No_RB,RB)
+```
+
+<br>
+
+**A3. The 2 populations are Normal**
+
+Boxplots look fairly symmetric.
+
+```{r, echo = F, fig.height= 3, warning=FALSE}
+require(ggplot2)
+p3 = ggplot(RB_data, aes(sample = rate, colour = group)) +  
+  stat_qq() + stat_qq_line() + ggtitle("QQplot")
+p3
+```
+
+```{r,eval=F}
+require(ggplot2)
+p3 = ggplot(RB_data, aes(sample = rate, colour = group)) +  
+  stat_qq() + stat_qq_line() + ggtitle("QQplot")
+p3
+```
+
+```{r}
+shapiro.test(No_RB)
+shapiro.test(RB)
+```
+
+
+
+
+
+
+

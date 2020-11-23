@@ -1,0 +1,109 @@
+---
+title: "DATA1001/1901 Lab7"
+subtitle: "Understanding Chance"
+author: "© University of Sydney 2020"
+output:
+  html_document:
+    theme: flatly
+    number_sections: yes
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    code_folding: show
+---
+
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+
+# Live Demo
+
+We will demonstrate simulation of simple scenarios, including a simple game.
+
+## Simulation
+
+```{r}
+set.seed(1)  # This ensures the same simulation, "1" can be whatever you choose
+
+# Simulate 1 fair coin toss
+sample(c("H", "T"), 1, replace = T)
+
+# Simulate 1 biased coin toss
+sample(c("H", "T"), 1, replace = T,prob = c(0.9, 0.1))
+
+# Simulate 10 fair coin tosses, and summarise chances in a table.
+
+## Option1
+sample1 = sample(c("H", "T"), 10,replace=T)
+table(sample1)/10
+
+## Option 2
+sample2 = replicate(10, sample(c("H", "T"),1,replace=T))
+table(sample2)/10
+
+## Option 3
+sample3 = rbinom(n = 10, 1, 0.5)
+table(sample3)/10
+```
+
+## Using binomial function
+
+Suppose we have 10 trials with P(event) = 0.3.
+
+```{r}
+# The chance of getting 4 events is:
+dbinom(4,10,0.3)  # dbinom(x,n,p)
+
+# The chance of getting less than or equal to 5 events is:
+pbinom(5,10,0.3)    # pbinom(x,n,p)
+```
+
+<br>
+
+# Game
+
+Here's the rules of a game:
+
+- A game costs $50 to play. 
+- You get to throw a fair dice 20 times.
+- You get \$8 for any 6s thrown.
+
+Simulate your net win/loss.
+
+```{r}
+# Simulate the 20 throws of the fair dice
+set.seed(100)
+sample3 = sample(c(1:6), 20, replace = T)
+table(sample3)
+barplot(table(sample3), xlab="dice face", ylab="chance", col= "lightblue")
+```
+
+Conclusion: Based on this simulation, your net loss would be \$8*5-\$50 = -\$10.
+
+
+<br><br>
+
+# Have a go
+
+Here's the rules of another game:
+
+- A game costs $10 to play. 
+- You get to throw a biased coin 5 times, where the probability of getting a head is 0.2. 
+- You get $20 for each Head you thow. 
+
+Simulate your net win/loss.
+
+```{r}
+# Simulate the 5 throws of the biased dice
+```
+
+

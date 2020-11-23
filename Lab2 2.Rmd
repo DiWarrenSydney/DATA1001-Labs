@@ -1,0 +1,94 @@
+---
+title: "DATA1001 Lab2"
+subtitle: "Data & Graphical Summaries"
+author: "© University of Sydney 2020"
+output:
+  html_document:
+    theme: flatly
+    number_sections: yes
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    code_folding: show
+---
+
+# Live Demo
+
+1. We will demonstrate how to classify variables and isolate a variable. This is called Initial Data Analysis (IDA).
+
+```{r}
+# lists the top 6 rows of the data
+head(iris)
+
+#lists the top 2 rows
+head(iris,2)
+
+# lists the number of rows & number of columns
+dim(iris)
+
+#lists the names of the variables
+names(iris)
+
+# classify variables
+str(iris)
+
+# isolate a variable
+iris$Sepal.Length
+```
+
+
+Note: Keep in mind that R has slightly different terms for types of variables.
+
+“factor” = qualitative
+
+“numeric” = quantitative
+
+
+2. We will demonstrate how to produce a histogram and a barplot in base R.
+
+```{r}
+# produce a histogram (quantitative variable)
+hist(iris$Sepal.Length)
+
+# produce a barplot (qualitative variable)
+barplot(table(iris$Species))
+```
+
+3. We will demonstrate how to produce a histogram and a barplot in ggplot.
+
+```{r}
+# install.packages("ggplot2")
+library(ggplot2)
+
+# produce a histogram (quantitative variable)
+p1 = ggplot(iris, aes(x = Sepal.Length))  # Defines the x axis (1 variable).
+p1 + geom_histogram() # Represents the data by histogram. 
+
+# produce a barplot (qualitative variable)
+p2 = ggplot(iris, aes(x=Species))
+p2 + geom_bar()
+```
+
+
+# Have a go
+
+1. List the bottom 2 rows of the iris data.
+
+```{r}
+# Write your code in here
+```
+
+2. Select the `Sepal.Width` variable and produce a histogram in base R, and then ggplot.
+
+```{r}
+# Write your code in here
+```
+
+3. Select the `Species` variable and produce a barplot, shaded green, in both base R and then ggplot.
+
+```{r}
+# Write your code in here
+```
+
+
+4. Experiment yourself.

@@ -1,0 +1,56 @@
+---
+title: "DATA1001 Lab6 Worksheet"
+subtitle: "Linear Model"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+# <i class="fa fa-crosshairs"></i> Aim {-}
+
+At the end of this Worksheet, you should be able to use the Normal distribution in a vertical strip, to work out chance for a linear regression model.
+
+
+
+<br>
+
+# Vertical strips {-}
+
+(i) Read the lecture notes carefully [here](http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/lectures/16.ResidualPlot.html#27): from page 27 to the end.
+Draw a picture to represent this result.
+
+(ii) Assume the air quality index (AQI) in CE Sydney can be modelled by a Normal, with mean 50.77 and SD 21.88. On what percentage of days, would you predict the CE AQI to be above 80?
+
+(iii) Now consider the days that had CE AQI to above 80. On what percentage of days, would you predict the NW AQI to be above 90?
+
+
+
+
+
+
+
+
+
+

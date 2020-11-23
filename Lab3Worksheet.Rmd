@@ -1,0 +1,46 @@
+---
+title: "DATA1001 Lab3 Worksheet"
+subtitle: "Numerical Summaries"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+# <i class="fa fa-crosshairs"></i> Aim {-}
+
+At the end of this Worksheet, you should be able to contrast numerical summaries for a given context.
+
+<br>
+
+# Numerical summaries (on Whiteboards)
+
+- Propose a dataset where the mean and median would be very different. Why? Sketch a possible visualisation.
+
+- What is misleading with the data viz in [How contagious and deadly is it?](https://informationisbeautiful.net/visualizations/covid-19-coronavirus-infographic-datapack/)
+
+
+
+
+

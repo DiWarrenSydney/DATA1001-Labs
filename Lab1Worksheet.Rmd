@@ -1,0 +1,59 @@
+---
+title: "DATA1001 Lab1 Worksheet"
+subtitle: "Intro to Data Science"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+# <i class="fa fa-crosshairs"></i> Aim {-}
+
+At the end of this Worksheet, you should be able to define data science, and begin to interact with visualisations.
+
+<br>
+
+
+# Intro to Data Science
+
+- Define data science in 1 sentence. What skills does it require? Can you think of a job that wouldn't need data.
+
+
+- What is wrong with this visualisation?
+
+<div align="center">
+<img src="figure/2020/Lab1_badviz_pizza.png" width="80%" height="80%">
+</div>
+
+[Article](https://aperiodical.com/2017/03/not-a-pizza-pie-chart/)
+[Source](https://yougov.co.uk/topics/politics/articles-reports/2017/03/06/does-pineapple-belong-pizza)
+
+
+
+
+
+
+
+
+

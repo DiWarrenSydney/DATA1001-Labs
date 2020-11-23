@@ -1,0 +1,29 @@
+---
+title: "Put your title here"
+subtitle: "Put your subtitle here"
+author: "xxx"
+date: "Put the date here"
+---
+
+# Heading 1
+
+## Sub-heading
+
+Write your text here.
+
+- This is a bullet point.
+
+- Below is a code block.
+
+```{r}
+# Use R as calculator
+1+1
+x=c(1,2,3,4,5)
+x+1
+# Experiment with data in R
+head(mtcars)
+```
+
+# Heading 2
+
+

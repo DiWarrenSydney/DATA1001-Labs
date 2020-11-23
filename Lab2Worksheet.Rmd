@@ -1,0 +1,63 @@
+---
+title: "DATA1001 Lab2 Worksheet"
+subtitle: "Design of Experiments, Data & Graphical Summaries"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+# <i class="fa fa-crosshairs"></i> Aim {-}
+
+At the end of this Worksheet, you should be able to interrogate the design of an experiment [revision Week1] and design your own visualisation [Week2].
+
+<br>
+
+# Design of Experiments
+
+- Invent a medical trial. Draw a randomised controlled experiment, identifying all participants in terms of treatment and control. List all your assumptions and possible confounders/ bias.
+
+- Do you agree?  
+
+<div align="center">
+<img src="figure/2020/Lab2_designofstudy.png" width="80%" height="80%">
+</div>
+
+[Article](https://theconversation.com/why-we-need-to-pay-more-attention-to-negative-clinical-trials-59904)
+
+
+# Data & Graphical summaries
+
+- For studying road fatalities in Australia, invent a research question. List the variable(s) needed. Sketch a possible visualisation.
+
+- What is wrong with this infographic? How would you suggest the data was presented?
+
+<div align="center">
+<img src="figure/2020/Lab3_badinfographic.png" width="80%" height="80%">
+</div>
+
+[Source](https://i2.wp.com/vizfix.com/wp-content/uploads/BabyBoomers_GenInfographic.jpg?ssl=1)
+
+
+

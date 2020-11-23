@@ -1,0 +1,118 @@
+---
+title: "DATA1001/1901 Lab4 Worksheet (Answers)"
+subtitle: "Normal Model"
+author: "University of Sydney"
+output:
+  html_document:
+    theme: flatly
+    number_sections: yes
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    code_folding: show
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+
+# <i class="fa fa-crosshairs"></i> Aim {-}
+
+- Now we will see how easy it is in R to find areas under the Normal curve and percentiles.
+
+- You should still draw a quick sketch of the Normal curve for each section, highlighting the relevant area, so you can visualise the problem, before you use R!
+
+<br>
+
+# Standard Normal Curve
+
+The Standard Normal curve has mean 0 and standard deviation (SD) 1, and is written as  N(0,1)
+
+- What is the area under the curve between -1 and 1?
+
+```{r}
+pnorm(1)-pnorm(-1)
+```
+
+- What is the  area between -2.5 and 2.5.
+
+```{r}
+# Write your code here
+```
+
+
+- What is the 84% percentile?
+
+```{r}
+qnorm(0.84)
+```
+
+- What is the 60% percentile.
+
+```{r}
+# Write your code here
+```
+
+<br>
+
+
+# General Normal Curve
+
+A General Normal curve has mean 10 and standard deviation (SD) 3, and is written as  N(10,3^2):
+
+- What is the area under the curve lower than 7?
+
+```{r}
+pnorm(7,10,3) 
+```
+
+- What is the 30% percentile?
+
+```{r}
+# Write your code here
+```
+
+<br>
+
+# <i class="fas fa-football-ball"></i> Australian men's AFL team
+
+Using the [ABS](http://www.abs.gov.au/ausstats/abs@.nsf/Lookup/4338.0main+features212011-13 ), assume that the height of Australian mean can be modelled by a Normal curve, with mean = 175.6cm and SD = 10cm.
+
+- What percentage of Australian men are between 165.6cm and 185.6cm?
+
+```{r}
+pnorm(185.6,175.6,10) - pnorm(165.6,175.6,10)
+```
+
+
+- If 50% of Australian men are below a certain height, what is that height?
+
+```{r}
+qnorm(0.5,175.6,10)
+```
+
+
+<br>
+
+In the Australian Football League (AFL) recruiters tend to look for tall male players. According to the [HeraldSun](http://www.heraldsun.com.au/sport/afl/size-matters-at-afl-level/story-e6frf9jf-1226650225771), the minimum height that recruiters look for is 180cm. Using the Normal curve above, estimate the chance of finding an Australian man able to be recruited for AFL?
+
+```{r}
+# Write your code here
+```
+
+<br>
+
+West Coast ruckman Nick Naitanui is 201cm tall. What is the chance of finding an Australian male taller than Nick?
+
+```{r}
+# Write your code here
+```
+

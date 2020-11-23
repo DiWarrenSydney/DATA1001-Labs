@@ -1,0 +1,155 @@
+---
+title: "DATA1001 Lab4 Worksheet"
+subtitle: "Normal Model"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+# <i class="fa fa-crosshairs"></i> Aim {-}
+
+At the end of this Worksheet, you should be able to model a variable by a Normal curve, and explain how to estimate areas under the curve, using the 3 known thresholds (68%, 95%, 99.7%).
+
+- It is vital that you draw a *quick sketch* of the Normal curve that you are considering, *before* you attempt any calculations.
+- The *area under the curve* up to point $x$, represents the *chance* (or "probability") of getting a value less than or equal to $x$.
+
+<br>
+
+
+# Normal Model
+
+Pick something your could measure in your home. Sketch a possible Normal curve and explain the 3 thresholds.
+
+<br>
+
+
+# Standard Normal Curve
+
+The Standard Normal curve has mean 0 and standard deviation (SD) 1, and is written as  N(0,1):
+
+- Draw the curve and the 3 thresholds (68%, 95%, 99.7%)
+- What is the area under the curve between -1 and 1?
+- Estimate the area between -2.5 and 2.5.
+- What is the 84% percentile?
+- Estimate the 60% percentile.
+
+<br>
+
+
+# General Normal Curve
+
+A General Normal curve has mean 10 and standard deviation (SD) 3, and is written as  N(10,3^2):
+
+- Draw the curve and the 3 thresholds (68%, 95%, 99.7%)
+- What is the area under the curve lower than 7?
+- Estimate the 30% percentile.
+
+<br>
+
+# <i class="fas fa-football-ball"></i> Australian men's AFL team
+
+First consider the heights of Australian men.
+
+- According to the [ABS](http://www.abs.gov.au/ausstats/abs@.nsf/Lookup/4338.0main+features212011-13), what is the **mean** height of Australian men?
+
+- Assume a **standard deviation** of 10cm for the heights of Australian men. Draw a Normal curve representing the heights.
+
+- What percentage of Australian men are between 165.6cm and 185.6cm?
+
+- If 50% of Australian men are below a certain height, what is that height?
+
+<br>
+
+In the Australian Football League (AFL) recruiters tend to look for tall male players. 
+
+-  According to the [HeraldSun](http://www.heraldsun.com.au/sport/afl/size-matters-at-afl-level/story-e6frf9jf-1226650225771), what is the minimum height that recruiters look for? 
+
+- Using the Normal curve above, estimate the chance of finding an Australian man able to be recruited for AFL?
+
+<br>
+
+West Coast ruckman Nick Naitanui is 201cm tall.
+
+- What is the chance of finding an Australian male taller than Nick?
+
+<br>
+
+# <i class="fas fa-cog"></i>  Notes on using R
+
+- By convention we represent a Normal curve by $N(mean, SD^2)$.
+- However, in R the `pnorm()` command requires`pnorm(threshold, mean, SD)`.
+  - `pnorm(x)` calculates the lower tail of the Standard Normal curve from `x` down.
+  - `pnorm(x,lower.tail=F)`calculates the upper tail of the Standard Normal curve, from `x` up.
+  - `qnorm(x)` calculates the x% percentile of the Standard Normal curve.
+
+<br>
+
+1. Which of the following pairs of parameters, defines a particular Normal curve?
+<br>
+(A) mean and median
+<br>
+(B) mean and interquartile range
+<br>
+(C) median and standard deviation
+<br>
+(D) mean and standard deviation
+<br>
+(E) range and outliers
+
+2. Which command works out the area under the curve for $X \sim N(284.3,5.52^2)$?
+
+```` {r fig.height=2.5,echo=F}
+curve(dnorm(x, mean = 284.3, sd = 5.52), xlim = c(270, 300),ylab="",axes=FALSE)
+abline(h = 0)
+sequence <- seq(270, 275, 0.1)
+polygon(x = c(sequence,275,270),
+        y = c(dnorm(c(sequence),284.3,5.52),0,0),
+        col = "red")
+axis(1, at=c(270,275,284.3), pos=0)
+```
+
+(A) `pnorm(275,284.3,5.52)-pnorm(270,284.3,5.52)`
+<br>
+(B) `1-pnorm(275,284.3,5.52)-pnorm(270,284.3,5.52)`
+<br>
+(C) `pnorm(275,284.3,sqrt(5.52))-pnorm(270,284.3,sqrt(5.52))`
+<br>
+(D) `1-qnorm(270,275)`
+<br>
+(E) `1+qnorm(270,275)`
+
+3. Which command will calculate $P(X > 1.2)$ when $X \sim N(3,4)$?
+(A) `1-pnorm(1.2,3,4)`
+<br>
+(B) `qnorm(1.2,3,4)`
+<br>
+(C) `pnorm(1.2,3,2,lower.tail=F)`
+<br>
+(D) `1-pnorm(1.2,3,4,lower.tail=F)`
+<br>
+(E) `pnorm(1.2,3,2)`
+
+<br>
+

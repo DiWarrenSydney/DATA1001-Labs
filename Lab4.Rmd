@@ -1,0 +1,50 @@
+---
+title: "DATA1001/1901 Lab4"
+subtitle: "Normal Model"
+author: "University of Sydney"
+output:
+  html_document:
+    theme: flatly
+    number_sections: yes
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    code_folding: show
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+
+# Live Demo
+
+We will demonstrate how to:
+
+- add a Normal curve to a histogram
+- produce Normal probabilities (pnorm) and Normal quantiles (qnorm).
+
+
+```{r, eval = F}
+# How to add a Normal curve to a histogram
+hist(iris$Petal.Length, freq=F)
+curve(dnorm(x, mean = mean(iris$Petal.Length), sd = sd(iris$Petal.Length)), col = "lightblue", lwd = 6, add = TRUE)
+```
+
+```{r}
+# Produce Normal probabilities
+pnorm(7, mean = mean(iris$Petal.Length), sd = sd(iris$Petal.Length))
+```
+
+
+```{r}
+# Produce Normal quantiles
+qnorm(0.5, mean = mean(iris$Petal.Length), sd = sd(iris$Petal.Length))
+```

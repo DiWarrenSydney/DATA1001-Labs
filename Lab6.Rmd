@@ -1,0 +1,237 @@
+---
+title: "DATA1001/1901 Lab6"
+subtitle: "Linear Model"
+author: "© University of Sydney 2020"
+output:
+  html_document:
+    theme: flatly
+    number_sections: yes
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    code_folding: show
+---
+
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+# Live Demo
+
+We will demonstrate some non-linear modelling on iris, and then do a quick demo of the rest of the exercises below.
+
+```{r}
+# Consider the iris data
+```
+
+
+<br>
+
+# Blood Alcohol Concentration (BAC) 
+
+Blood Alcohol Concentration (BAC) is the percentage of alcohol in the blood. Referring to this [Drinkwise article](https://drinkwise.org.au/drinking-and-you/is-there-such-a-thing-as-safe-drink-driving/#):
+
+- What is considered a ["standard drink"](https://drinkwise.org.au/drinking-and-you/how-much-have-you-had-to-drink/#) in Australia?
+- What is the legal BAC for [driving a car](https://drinkwise.org.au/drinking-and-you/is-there-such-a-thing-as-safe-drink-driving/#) in Australia (learner, provisional,full)?
+- What are the possible effects of alcohol on driving?
+
+The data in `AlcoholConcentration` contains the blood concentration (in ng/mL) at time t hours after consuming alcohol.
+
+```{r}
+bac = read.csv("http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/data/AlcoholConcentration.csv")
+```
+
+## Executive Summary
+
+## Initial Data Analysis (IDA)
+
+```{r,results='hide', fig.show = 'hide'}
+str(bac)
+```
+
+## Research Question:  Is there a relationship between BAC and time?
+
+Here we consider 2 quantitative variables: `Time` and `Conc`.
+
+- Produce a scatterplot.
+
+```{r,results='hide', fig.show = 'hide'}
+Time = bac$TimeHours
+Conc = bac$BloodAlcoholConcentration
+plot(Time, Conc, xlab="Time (hr)", ylab="Conc (units)", pch=16, cex.lab=1.3, col="red")
+```
+
+- What do you observe?
+
+### Fit the following linear model to the data.
+
+\[ BAC = 0.100 - 0.015 t    \]
+
+```{r,results='hide', fig.show = 'hide'}
+plot(Time, Conc, xlab="Time (hr)", ylab="Conc (units)", pch=16, cex.lab=1.3, col="red")
+abline(a=0.100,b=-0.015, col = "darkgreen", lwd = 3)
+# Plot a horizontal line at 0.05
+abline(h=0.05, col = "purple", lwd = 1, lty=2)
+```
+
+- From the plot, how long does it take to be legal to drive?
+
+- Using the scatter plot and residual plots, assess the suitability of the model.
+
+```{r,results='hide', fig.show = 'hide'}
+par(mfrow=c(1,2))
+# Scatter plot
+plot(Time, Conc, xlab="Time (hr)", ylab="Conc (units)", pch=16, cex.lab=1.3, col="red")
+abline(a=0.100,b=-0.015, col = "darkgreen", lwd = 3)
+# Residual plot
+predictedvalues = 0.100-0.015*Time
+residuals = Conc - predictedvalues
+plot(Time, residuals, ylab = "residuals")
+abline(h = 0, col="blue")
+```
+
+## Further research
+
+What does this [report](https://www.aph.gov.au/DocumentStore.ashx?id=c1bbe04c-e3ad-442e-93d9-9d99c639b7b9&subId=411549) find about BAC in Australian night time entertainment districts? How was linear regression used?
+
+<br>
+
+# Blood Ice Concentration (BIC) 
+
+Methamphetamine (or ice/speed/meth) is a highly addictive central nervous system (CNS) stimulant that is used as a recreational drug. 
+
+The data in `MethConcentration` contains the blood concentration (in ng/mL) at time $t$ hours after using ice.
+
+```{r}
+bic = read.csv("http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/data/MethConcentration.csv")
+```
+
+## Domain knowledge
+
+From the following [ADF article](https://adf.org.au/drug-facts/ice/):
+
+- What are the different forms of meth?
+- What are possible side-effects of using crystal meth (ice)?
+- How long can the ice 'high' last?
+- What are some medical uses of meth?
+- Why does Australia now regulate the sale of pseudoephedrine (a common nasal decongestant)?
+
+## Initial Data Analysis (IDA)
+
+```{r,results='hide', fig.show = 'hide'}
+str(bic)
+```
+
+## Research Question: Is there a relationship between BIC and time?
+
+Here we consider 2 quantitative variables: `Time` and `Conc`.
+
+- Produce a scatterplot.
+
+```{r,results='hide', fig.show = 'hide'}
+Time =  bic$TimeHours
+Conc = bic $BloodConcentration
+# Insert your own code
+```
+
+- What do you observe?
+
+### Fit a linear model: $y = a + bt$
+
+```{r,results='hide', fig.show = 'hide'}
+# Insert your own code
+```
+
+- What is the correlation coefficient? 
+
+```{r,results='hide', fig.show = 'hide'}
+# Insert your own code
+```
+
+- Check the residual plot. What is the problem?
+
+```{r,results='hide', fig.show = 'hide'}
+# Insert your own code
+```
+
+Note: If the linear model is `L = lm(y ~ x)`, then the residuals are found in `L$residuals` or `resid(L)`, and the residual plot is `plot(x,L$residuals)`.
+
+
+### Fit a quadratic model: $y = a + bt + c t^2$
+
+```{r,results='hide', fig.show = 'hide'}
+# Quadratic model
+Time2 = Time^2
+quad.model = lm(Conc ~ Time + Time2)
+summary(quad.model)
+# Predicted values
+set.seed(1)
+timevalues = seq(0, 50, 0.1)
+predictedvalues = predict(quad.model, list(Time = timevalues, Time2 = timevalues^2))
+# Plot
+plot(Time, Conc, pch = 16, xlab = "Time (s)", ylab = "Conc", cex.lab = 1.3, col = "indianred")
+lines(timevalues, predictedvalues, col = "darkgreen", lwd = 3)
+```
+
+### Try $y = 47e^{−0.06t}$, for $t > 3$.
+
+```{r,results='hide', fig.show = 'hide'}
+plot(Time,Conc)
+curve(47*exp(-0.06*x),3,50,add=T)
+```
+
+For full code for fitting an exponential, see your [lecture notes](http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/lectures/18.NonLModels.html).
+
+### Try your own choice.
+
+```{r,results='hide', fig.show = 'hide'}
+# Insert your own code
+```
+
+<br>
+
+# DATA1901 Extension
+
+## Windmark's Formula
+
+[Windmark's Formula](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4361698/) states that:
+\[ BAC = \frac{100A}{rW} − V t \]
+where
+
+- A = amount of alcohol consumed (in grams)
+- r = Windmark's factor, measuring the % of body mass that is water (women \approx 0.6; men \approx 0.7)
+- W = body mass (in grams)
+- V = rate at which the boy eliminates alcohol (eg V=0.015%)
+- t = time since commencing drinking (in hours)
+
+Assume:
+
+- the average Australian male [weighs 85.9kg](http://www.abs.gov.au/ausstats/abs@.nsf/Lookup/4338.0main+features212011-13) and drinks 2.5 beers in an hour. 
+- a beer contains 1.5 standard drinks, where a standard drink is 10g alcohol. 
+- a male drinks 4 beers in a short period of time.
+
+- Show the formula (to 3dp) for BAC is 
+\[ BAC = 0.100 - 0.015 t    \]
+
+- What is his BAC after 1 hour?
+
+- How long does it take for him to be legal to drive?
+
+More Reading:
+[BAC Formulae](http://www.kenderdinemathstutoring.com.au/downloads/3011085/BAC+formula+questioned+amended.pdf)
+[Modelling drugs](http://www.appstate.edu/~spruntwh/bac_ncctm.pdf)
+
+
+
+
+
+
+

@@ -1,0 +1,49 @@
+---
+title: "DATA1001 Lab1 Computation"
+subtitle: "Intro to R in RStudio"
+author: "University of Sydney 2020"
+output:
+  html_document:
+    theme: flatly
+    number_sections: yes
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    code_folding: show
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+
+# Live Demo
+
+1. We will demonstrate where to find R and R Studio, and what RStudio looks like.
+
+2. We will use RStudio as a calculator.
+
+3. We will demonstrate some simple R commands using the `mtcars` dataset.
+
+
+# Have a go
+
+Try running this code yourself, based on the `iris` data.
+Then make small changes and see what happens!
+
+```{r}
+1+1
+
+# IDA for iris data
+head(iris)
+tail(iris)
+help(iris)
+```
+

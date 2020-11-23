@@ -1,0 +1,253 @@
+---
+title: "DATA1001 Lab7 Worksheet"
+subtitle: "Understanding Chance"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+# <i class="fa fa-crosshairs"></i> Aim {-}
+
+At the end of this Worksheet, you should be able to:
+
+- model an appropriate scenario by the Binomial model
+- explain the Prosecutor's fallacy
+
+<br>
+
+**Binomial Formula:**
+
+- See formula in lectures [here](http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/lectures/21.BinomialFormula.html#21).
+
+- Suppose we have n independent, binary trials, with P(event)=p at every trial, and n is fixed.
+
+- The chance that exactly x events occur is:
+\[ { n \choose x} p^{x} (1-p)^{n-x} \]
+
+
+**Hints:** 
+
+- Check you have a sequence of n repeated independent trials.
+- Identify the event which is considered a "success", and the constant "success" probability p. 
+- Identify the number of successes being considered x. 
+- Then use the Binnomial formula. 
+
+<br>
+
+# Scenarios
+
+## Call centre
+
+Here's the details:
+
+- A company "cold calls" their current customers to try to get them to upgrade to a new phone plan.
+- An employee completes on average 5 calls per hour, with success rate 40%.
+- The employee gets a \$50 bonus for getting all 5 customers to upgrade.
+- What is the chance that the employee gets a bonus?
+
+Assumptions:
+
+- Let each phone call the employee makes be an independent trial, with success rate 40%.  So p = 0.4.
+- The employee makes 5 calls per hour. So n = 5.
+- We want to consider x = 5.
+
+Model:
+
+- Let X = number of successful phones calls (ie customer upgrades) out of 5 ~ Bin(n=5, p=0.4)
+- The chance that x = 5 is:
+
+\[ { 5 \choose 5} (0.4)^{5} (0.6)^{0} = 0.01024 \]
+
+Conclusion: In an hour, there's a 1% chance that the employee gets the bonus!
+
+## Have a go
+
+Here's the details:
+
+- Suppose a new diagnostic test can detect a certain virus with 90% accuracy.
+- 1000 people are tested for the virus, using the new diagnostic test.
+- What is the chance that exactly 9% of the people get an *inaccurate* result?
+
+Assumptions:
+
+- Let each person having the medical test be an independent trial, with success rate 90%.  So p = 0.9.
+- 1000 people are tested. So n = 1000.
+- We want to consider x = 910 (91% of 1000 are accurate, as 9% are inaccurate).
+
+Model:
+
+- Let X = number of successful medical detections of the virus in 1000 trials ~ Bin(n=1000, p=0.9)
+- The chance that x = 910 is:
+
+\[ { 1000 \choose 910} (0.9)^{910} (0.1)^{90} =  \]
+
+```{r}
+choose(1000,910)*(0.9)^910*(0.1)*90
+```
+
+Conclusion: The chance of getting exactly 9% inaccurate tests is tiny.
+
+<br>
+
+Note: More likely we would be asking "What is the chance that less than 9% of the people get an *inaccurate* result?" which is the same as "What is the chance that 91% or more of the people get an *accurate* result?"
+
+So the answer is:
+
+```{r}
+# Summing up all the cases 910-1000
+x=c(910:1000)
+sum(choose(1000,x)*(0.9)^x*(0.1)^(1000-x))
+
+# Using dbinom
+x=c(910:1000)
+sum(dbinom(x,1000,0.9))
+
+#  Using pbinom
+1-pbinom(909,1000,0.9)   # 910 or more successes, is 1- 909 or less successes.
+```
+
+Conclusion: The chance of getting less than 9% inaccurate tests is about 16% (to 2dp).
+
+<br>
+
+# <i class="fas fa-gavel"></i> Prosecutor's Fallacy
+
+What is the prosecutor's fallacy? What was the mistake in statistical thinking in the Sally Clarke trial? 
+
+<br>
+
+# <i class="fab fa-spotify"></i> Spotify  
+
+Spotify is an online music streaming service, which allows the user to create and share play lists.
+
+## Song list
+- Create a potential Spotify list, by listing your top 10 favourite songs. 
+
+For example:
+
+|Song|Name|Artist|Australian Artist (Yes/No)|
+|---|---|---|---|
+|1|Skinny Love|Birdy|No|
+|2|Better Together|Jack Johnson|No|
+|---||||
+|10||||
+|||||
+
+- In how many different ways could Spotify shuffle this list?
+
+## Play 2 Songs (with replacement)
+Suppose Spotify randomly plays 2 songs, with replacement.
+
+- How many different play lists are there?
+
+- What is the chance of getting a certain song twice?
+
+- What is the chance of getting any song twice? Simulate this situation, using 1000 replications.
+
+```{r, results='hide'}
+set.seed(2)
+songs=c(1:10)
+r=replicate(10000,sample(songs,2,replace=T))
+length(which(r[1,]==r[2,]))/10000
+```
+
+- What is the chance of getting a certain song twice, given it was the 1st song? 
+
+Check your answers:
+```{r, results='hide'}
+# number of ways to shuffle 10 songs (with replacement)
+factorial(10)
+# total number of playlists
+10*10
+# chance of getting a certain song twice
+1/(10*10)
+# chance of getting any song twice
+10/(10*10)
+# chance of not getting any song twice
+1-(10/(10*10))
+```
+
+## Play 2 Songs (without replacement)
+Now suppose Spotify randomly plays 2 songs, without
+replacement.
+
+- How many different play lists are there?
+
+- What is the chance of getting your favourite play list?
+
+- What is the chance of getting a certain song twice? Simulate this situation.
+
+```{r, results='hide'}
+set.seed(2)
+songs=c(1:10)
+r=replicate(10000,sample(songs,2,replace=F))
+length(which(r[1,]==r[2,]))/10000
+```
+
+Check your answers:
+```{r, results='hide'}
+# total number of playlists (w/o replacement)
+10*9
+# chance of getting your favourite playlist
+1/(10*9)
+# chance of getting a certain song twice
+0
+# chance of not getting any song twice
+1-(10/(10*10))
+```
+
+- According to this [article](https://www.lifewire.com/is-itunes-shuffle-random-1999249), how does ipod shuffle it's playlists?
+
+Extension: 
+<i class="fa fa-link"></i> [Spotify and Data](https://www.safaribooksonline.com/library/view/strata-data-conference/9781491976326/video314445.html?utm_source=oreilly&utm_medium=newsite&utm_campaign=strata-ny-17-keynote-highlight-music-the-window-into-your-soul)
+
+## Properties
+
+- Which of the previous events are independent, dependent or mutually exclusive?
+
+## Modelling by Binomial
+
+Suppose that there are 5% of Australian artists on Spotify. You randomly sample 10 songs, with replacement.
+
+- How could this situation be modelled by throwing a coin?
+
+- What is the probability of sampling 2 Australian artists?
+
+```{r, results='hide'}
+# Using Binomial formula
+choose(10,2)*(0.05)^2*(0.95)^8
+# Speedy way in R
+dbinom(2,10,0.05)
+```
+
+- What is the probability of sampling 2 or less Australian artists?
+
+```{r, results='hide'}
+# Using Binomial formula
+dbinom(0,10,0.05) + dbinom(1,10,0.05) + dbinom(2,10,0.05)
+# Speedy way in R
+pbinom(2,10,0.05)
+```
+

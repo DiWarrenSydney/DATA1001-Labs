@@ -1,0 +1,201 @@
+---
+title: "DATA1001/1901 Lab3 Summary Sheet"
+subtitle: "Graphical Summaries"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+# <i class="fa fa-th-list"></i> Summary {-}
+
+You are beginning to learn how to:
+
+- pose research questions
+- choose what graphical summaries are appropriate for given variables
+- interpret the output.
+
+Below is an exemplar of lots of research questions applied to the Road Fatailities dataset.
+
+<br>
+
+Type of Variable | Referred to in R |
+-------- | ------- | 
+Qualitative / Categorical | `factor`
+Quantitative / Numerical | `num`
+| |
+
+Type of Data | Type of Graphical Summary | In R |
+------------------------ | -------------------------- | -------------- | 
+1 Qualitative Variable | Barplot | `barplot()` |
+2 Qualitative Variables |  Double (clustered) Barplot |  `barplot()` |
+1 Quantitative Variable | Histogram or Boxplot  | `hist()`, `boxplot()`|
+2 Quantitative Variables | Scatterplot | `plot()`|
+1 Quantitative & 1 Qualitative Variable | Double (comparative) boxplot | `boxplot()`|
+| | |
+
+<br>
+
+
+# <i class="fas fa-car"></i> Australian Road Fatalities
+
+Consider the Australian road fatalities from 1989 (a bigger version of the data used in Week 2 lectures). The data is sourced from [BITRE](https://bitre.gov.au/statistics/safety/fatal_road_crash_database.aspx).
+
+**How to proceed?**
+
+- Read through each question.
+- Try to guess the code, and then check the given code.
+
+<br>
+
+## Initial Data Analysis
+
+- Upload the data.
+
+```{r}
+# Read data from url into R
+road = read.csv("http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/data/AllFatalities.csv")
+```
+
+Note: An alternative way is to download the data from Canvas, store the data in `DATA1001files/data` and upload from there. You will need to use this method in future projects, when you upload your own data.
+
+```{r,eval=F}
+# Read data from url into R
+road = read.csv("data/AllFatalities.csv",header=T)
+```
+
+- Produce a snapshot of the data. 
+```{r,eval=F}
+str(road)
+```
+
+
+<br>
+
+## Research Questions
+
+### Were there more fatalities on a certain day of the week? 
+
+- Here we consider **1 qualitative variable**: the road fatalities across the *days of the week*.
+
+- 1st isolate the variable Dayweek. Check how R classifies it. Produce a barplot. What is annoying about it?
+
+```{r}
+class(road$Dayweek)
+barplot(table(road$Dayweek))
+```
+
+- We can re-order the categories for `dayweek` and the produce a barplot. What pattern emerges? Suggest possible reasons for it? 
+
+```{r}
+orderdayweek = ordered(road$Dayweek, levels=c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+barplot(table(orderdayweek))
+barplot(table(orderdayweek),las=2)
+```
+
+<br>
+
+### Was there any pattern in how buses were involved in fatalities, on different days of the week?
+
+- Here we consider **2 qualitative variables**: the road fatalities across the *days of the week*, cross-classified by *bus involvement*.
+
+- Is there any pattern?
+
+```{r}
+road1 = table(road$Bus_Involvement, road$Dayweek)
+road1
+barplot(road1, main = "Fatalities by Day of the Week and Bus Involvement", xlab = "Day of the week", 
+    col = c("lightblue", "lightgreen"), legend = rownames(road1))
+```
+
+
+<br>
+
+### Was there any pattern in how heavy rigid trucks were involved in fatalities, on different days of the week?
+
+- Here we consider **2 qualitative variables**: the road fatalities across the *days of the week*, cross-classified by *heavy rigid truck involvement*.
+
+- Investigate whether the involvement of heavy rigid trucks differs across the days?
+
+```{r}
+road2 = table(road$Hvy_Rigid_Truck_Involvement, road$Dayweek)
+road2
+barplot(road2, main = "Fatalities by Day of the Week and Heavy Rigid Involvement", xlab = "Day of the week", 
+    col = c("lightpink","lightblue", "lightgreen"), legend = rownames(road2))
+```
+
+<br>
+
+### Were there more fatalities in certain age groups?
+
+- Here we consider **1 quantitative variable**: *fatalities*.
+
+- 1st isolate the variable Age. How does R classify it?
+
+```{r}
+class(road$Age)
+```
+
+- Change the classification to a quantitative variable.
+```{r}
+road$Age = as.numeric(as.character(road$Age))
+class(road$Age)
+```
+
+- Produce graphical summaries. What patterns are revealed?
+```{r}
+hist(road$Age, prob=T)
+boxplot(road$Age)
+```
+
+- We can customise the plots.
+```{r}
+hist(road$Age,freq=FALSE,main="Histogram",ylab="Probabilities", col="green")
+boxplot(road$Age,horizontal=TRUE,col="red")
+```
+
+<br>
+
+### Does biological gender affect the number of fatalities across age groups?
+
+- Here we consider **1 quantative variable divided by 1 qualitative variable**.
+
+- Control for biological gender - ie consider fatalities by age divided by biological gender.
+```{r}
+ageF = road$Age[road$Gender == "Female"]
+ageM = road$Age[road$Gender == "Male"]
+par(mfrow = c(2, 1))
+boxplot(ageF,horizontal=T, col="light blue")
+boxplot(ageM,horizontal=T)
+```
+
+- You can put 2 plots next to each other.
+```{r}
+par(mfrow=c(2,1))
+boxplot(ageF,horizontal=T, col="light blue")
+boxplot(ageM,horizontal=T)
+```
+
+<br>
+

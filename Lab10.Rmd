@@ -1,0 +1,250 @@
+---
+title: "DATA1001/1901 Lab10"
+subtitle: "Hypothesis Testing: Proportion Test"
+author: "© University of Sydney 2020"
+output:
+  html_document:
+    theme: flatly
+    number_sections: yes
+    toc: true
+    toc_float: true
+    toc_depth: 4
+    code_folding: show
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+<br>
+
+# Live Demo
+
+We will give a quick demo of the exercises below.
+
+<br>
+
+# `r icon::fa("pills")` Probiotic treatment for peanut allergy  
+
+Perform the same test as your Worksheet, in R, using the Sample **Sum**, and then Sample **Mean**.
+Check you understand the purpose of each line of code.
+
+```{r,eval=F}
+# Write down hypotheses
+## Ho:The proportion of patient who respond to the treatment (“desensitise to peanut allergy”) is 0.8
+## H1: The proportion of patient who respond to the treatment (“desensitise to peanut allergy”) is more than 0.8.
+
+# H: Set up the box model representing the null hypothesis
+
+## Model: 1= Desensitisation; 0 = Not desensitisation; ie Ho: p=P(Desensitisation) = 0.8
+box=c(0,1,1,1,1)    # This represents 20% 0s and 80% 1s
+
+## Calculate the mean and SD of the box
+mean(box)
+library(multicon)
+popsd(box)
+
+# T [for Sample SUM)
+## Work out the EV and SE of the Sample Sum
+n = 29
+ev = n*mean(box)
+ev
+se = sqrt(n)*popsd(box)
+se
+
+## Note the OV of the Sample Sum from the data
+ov = 26   # give data
+
+## Calculate the Test Statistic
+ts = (ov-ev)/se   
+ts
+
+# P: Calculate the p-value using the Normal mode for the Sample Sum (CLT).
+1-pnorm(ts)   # 1 sided test, as "more than" in H1
+```
+
+
+```{r,eval=F}
+# H: Set up the box model representing the null hypothesis
+
+## Model: 1= Desensitisation; 0 = Not desensitisation; ie Ho: p=P(Desensitisation) = 0.8
+box=c(0,1,1,1,1)    # This represents 20% 0s and 80% 1s
+
+## Calculate the mean and SD of the box
+mean(box)
+library(multicon)
+popsd(box)
+
+# T [for Sample MEAN]
+## Work out the EV and SE of the Sample Mean
+n = 29
+ev = mean(box)
+ev
+se = popsd(box)/sqrt(n)
+se
+
+## Note the OV of the Sample Mean from the data
+ov = 26/n   # give data
+
+## Calculate the Test Statistic
+ts = (ov-ev)/se   
+ts
+
+# P: Calculate the p-value using the Normal mode for the Sample Sum (CLT).
+1-pnorm(ts)   # 1 sided test, as "more than" in H1
+```
+
+
+<br><br>
+
+# `r icon::fa("bitbucket")` Pepsi and Coke  
+
+Perform the same test as your Worksheet, in R, using the Sample **Sum** and **Mean**.
+
+```{r,eval=F}
+# Write down hypotheses
+## Ho: The proportion of people who prefer Coke over Pepsi is 0.5.
+## H1: The proportion of people who prefer Coke over Pepsi is not 0.5.
+
+# H: Set up the box model representing the null hypothesis
+
+## Model: 1= Coke; 0 = Pepsi; equal proportions, ie Ho: p=P(Coke) = 0.5
+box=c(0,1) 
+
+## Calculate the mean and SD of the box
+mean(box)
+library(multicon)
+popsd(box)
+
+# T [for Sample SUM)
+## Work out the EV and SE of the Sample Sum
+n = 1000
+ev = n*mean(box)
+ev
+se = sqrt(n)*popsd(box)
+se
+
+## Note the OV of the Sample Sum from the data
+ov = 0.52*n
+
+## Calculate the Test Statistic
+ts = (ov-ev)/se   
+ts
+
+# P: Calculate the p-value using the Normal mode for the Sample Sum (CLT).
+2*(1-pnorm(ts))   # 2 sided, as H1: "Not" 0.5
+```
+
+Note: This could have been solved using the sample **Mean**. 
+
+```{r,eval=F}
+# H: Set up the box model representing the null hypothesis
+
+## Model: 1= Coke; 0 = Pepsi; equal proportions, ie Ho: p=P(Coke) = 0.5
+box=c(0,1) 
+
+## Calculate the mean and SD of the box
+mean(box)
+library(multicon)
+popsd(box)
+
+# T [for Sample MEAN)
+## Work out the EV and SE of the Sample Mean
+n = 1000
+ev = mean(box)
+ev
+se = popsd(box)/sqrt(n)
+se
+
+## Note the OV of the Sample Mean from the data
+ov = 0.52
+
+## Calculate the Test Statistic
+ts = (ov-ev)/se   
+ts
+
+# P: Calculate the p-value using the Normal mode for the Sample Sum (CLT).
+2*(1-pnorm(ts))   # 2 sided
+```
+
+<br><br>
+
+# `r icon::fa("uber")` Uber 
+
+Perform the same test as your Worksheet, in R, using both the sample **Sum** and then **Mean**.
+
+
+```{r,eval=F}
+# Write down hypotheses
+## Ho: The current Sydney customer satisfication with Uber is 0.8
+## H1: The current Sydney customer satisfication with Uber is not 0.8
+
+# H: Set up the box model representing the null hypothesis
+
+# Model: 1= Happy with Uber in Sydney; 0 = Unhappy; 80% proportions, ie Ho: p=P(Happy with Uber Sydney) = 0.8
+box=c(0,1,1,1,1) 
+
+## Calculate the mean and SD of the box
+mean(box)
+library(multicon)
+popsd(box)
+
+# T [for Sample SUM)
+## Work out the EV and SE of the Sample Sum
+n= 1200
+ev = n*mean(box)
+ev
+se = sqrt(n)*popsd(box)
+se
+
+## Note the OV of the Sample Sum from the data
+ov = 948
+
+## Calculate the Test Statistic
+ts = (ov-ev)/se   
+ts   
+
+# P: Calculate the p-value using the Normal mode for the Sample Sum (CLT).
+2*(pnorm(ts))   # 2 sided, as H1 is "not".  # Note TS is negative, hence lower tail area.
+```
+
+
+```{r,eval=F}
+# H: Set up the box model representing the null hypothesis
+
+# Model: 1= Happy with Uber in Sydney; 0 = Unhappy; 80% proportions, ie Ho: p=P(Happy with Uber Sydney) = 0.8
+box=c(0,1,1,1,1) 
+
+## Calculate the mean and SD of the box
+mean(box)
+library(multicon)
+popsd(box)
+
+# T [for Sample MEAN
+## Work out the EV and SE of the Sample Mean
+n= 1200
+ev = mean(box)
+ev
+se = popsd(box)/sqrt(n)
+se
+
+## Note the OV of the Sample Mean from the data
+ov = 948/n
+
+## Calculate the Test Statistic
+ts = (ov-ev)/se   
+ts   
+
+# P: Calculate the p-value using the Normal mode for the Sample Sum (CLT).
+2*(pnorm(ts))   # 2 sided  # Note TS is negative.
+```
+
+
+

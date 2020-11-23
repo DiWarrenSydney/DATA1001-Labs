@@ -1,0 +1,12 @@
+# Resources
+
+ [R Studio Webinars](https://www.rstudio.com/resources/webinars/) 
+ 
+ [Data Camp: Intro to R](https://www.datacamp.com/courses/free-introduction-to-r)
+ 
+ [How to use R Markdown](https://www.oreilly.com/learning/easy-reproducible-reports-with-r?utm_medium=social&utm_source=twitter.com&utm_campaign=lgen&utm_content=data+webcast+ki&cmp=tw-data-na-article-lgen_tw_webcast_ki)
+ 
+ [Chart Chooser](http://www.yaksis.com/posts/r-chart-chooser.html)
+ 
+ 
+ 

@@ -1,0 +1,77 @@
+---
+title: "DATA1001 Lab5 Worksheet"
+subtitle: "Linear Model"
+author: "© University of Sydney 2020"
+date: 
+output:
+  html_document:
+    fig_caption: yes
+    number_sections: yes
+    self_contained: yes
+    theme: flatly
+    css: 
+      - https://use.fontawesome.com/releases/v5.0.6/css/all.css
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    code_folding: hide
+---
+<style>
+h2 { /* Header 2 */
+    font-size: 22px
+}
+</style>
+
+<style>
+h3 { /* Header 3 */
+    font-size: 18px
+}
+</style>
+
+# <i class="fa fa-crosshairs"></i> Aim {-}
+
+At the end of this Worksheet, you should be able to explain what linear regression is, in your own words, and how changing the variables can change (or not change) the correlation coefficient.
+
+**Hint:** Always do a quick sketch of the relevant scatter plot before answering any interpretation questions.
+
+<br>
+
+# Invent a linear relationship
+
+Propose 2 variables which might have a linear relationship
+Sketch a possible scatterplot, indicating the linear model and correlation coefficient.
+
+<br>
+
+# Affect on correlation of changing variables
+
+The following data `x=c(1,2,3,4,5)` and `y=c(2,3,1,5,6)` has correlation around 0.76.
+
+(i) Fill out the table, by just reasoning from the variables and a scatter plot.
+
+|Data|Correlation (2dp)|
+|---|---|
+|$x$ and $y$|$r=0.76$|
+|Swap $x$ and $y$||
+|Add 3 to each value of $x$||
+|Add 3 to each value of $x$ and minus 3 from each value of $y$||
+|Interchange the last 2 values of $y$||
+|||
+
+(ii) Check your answers using R.
+
+```{r, eval=F}
+# enter the data
+x=c(1,2,3,4,5)
+y=c(2,3,1,5,6)
+cor(x,y)
+
+# swap x and y
+cor(y,x)
+
+# add 3 to each value of y
+cor(x+3,y)
+```
+
+
+
