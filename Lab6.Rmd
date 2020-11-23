@@ -47,6 +47,7 @@ The data in `AlcoholConcentration` contains the blood concentration (in ng/mL) a
 
 ```{r}
 bac = read.csv("http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/data/AlcoholConcentration.csv")
+names(bac)[1] = "TimeHours"     # Use this line if the csv doesn't load the correct column name
 ```
 
 ## Executive Summary
@@ -64,10 +65,23 @@ Here we consider 2 quantitative variables: `Time` and `Conc`.
 - Produce a scatterplot.
 
 ```{r,results='hide', fig.show = 'hide'}
+# In base R
 Time = bac$TimeHours
 Conc = bac$BloodAlcoholConcentration
 plot(Time, Conc, xlab="Time (hr)", ylab="Conc (units)", pch=16, cex.lab=1.3, col="red")
 ```
+
+```{r, results='hide', fig.show='hide', warning=F}
+# In ggplot
+library(ggplot2)
+
+scatter_plot = ggplot(bac, aes(x = TimeHours, y = BloodAlcoholConcentration)) +
+  geom_point(colour = "red", size = 2) +
+  xlab("Time (hr)") + 
+  ylab("Conc (units)")
+scatter_plot
+```
+    
 
 - What do you observe?
 
@@ -76,10 +90,21 @@ plot(Time, Conc, xlab="Time (hr)", ylab="Conc (units)", pch=16, cex.lab=1.3, col
 \[ BAC = 0.100 - 0.015 t    \]
 
 ```{r,results='hide', fig.show = 'hide'}
+# In base R
+
 plot(Time, Conc, xlab="Time (hr)", ylab="Conc (units)", pch=16, cex.lab=1.3, col="red")
 abline(a=0.100,b=-0.015, col = "darkgreen", lwd = 3)
 # Plot a horizontal line at 0.05
 abline(h=0.05, col = "purple", lwd = 1, lty=2)
+```
+
+```{r,results='hide', fig.show = 'hide'}
+# In ggplot
+
+# We have saved the plot from before so we can add the linear model line to it
+scatter_plot + geom_abline(intercept = 0.1, slope = -0.015, colour = "darkgreen", size = 1.2) + 
+  geom_hline(yintercept = 0.05, linetype = "dashed", colour = "purple")
+  
 ```
 
 - From the plot, how long does it take to be legal to drive?
@@ -112,6 +137,7 @@ The data in `MethConcentration` contains the blood concentration (in ng/mL) at t
 
 ```{r}
 bic = read.csv("http://www.maths.usyd.edu.au/u/UG/JM/DATA1001/r/current/data/MethConcentration.csv")
+names(bic)[1] = "TimeHours"     # Use this line if the csv doesn't load the correct column name
 ```
 
 ## Domain knowledge
@@ -228,6 +254,30 @@ Assume:
 More Reading:
 [BAC Formulae](http://www.kenderdinemathstutoring.com.au/downloads/3011085/BAC+formula+questioned+amended.pdf)
 [Modelling drugs](http://www.appstate.edu/~spruntwh/bac_ncctm.pdf)
+
+# Coding Challenge
+
+Using the BAC data set, fit a polynomial model to the data of order 3. Next calculate the residuals of the fitted model to the data and plot them using `ggplot`. How many of the residuals are greater than 0.01?
+
+## Solution {-}
+
+```{r, message=F, warning=F}
+library(ggplot2)
+
+# Produce the model
+poly_model = lm(BloodAlcoholConcentration ~ poly(TimeHours, 3), data = bac)
+
+# Add the residuals to the bac data frame
+bac$predicted_values = predict(poly_model)
+bac$residuals = bac$predicted_values - bac$BloodAlcoholConcentration
+
+# Plot the residuals using ggplot and add a line at y = 0.01 to make it easy to see how many are above this line.
+ggplot(bac, aes(x=TimeHours, y=residuals)) + geom_point() + geom_line(aes(y = 0.01), colour="red")
+
+# Alternate solution without plotting
+sum(bac$residuals > 0.01)
+
+```
 
 
 

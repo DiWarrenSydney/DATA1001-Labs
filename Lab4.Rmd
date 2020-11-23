@@ -31,12 +31,31 @@ We will demonstrate how to:
 - add a Normal curve to a histogram
 - produce Normal probabilities (pnorm) and Normal quantiles (qnorm).
 
+## Adding normal curve to histogram {-}
+### In base R {-}
 
-```{r, eval = F}
+```{r}
 # How to add a Normal curve to a histogram
 hist(iris$Petal.Length, freq=F)
 curve(dnorm(x, mean = mean(iris$Petal.Length), sd = sd(iris$Petal.Length)), col = "lightblue", lwd = 6, add = TRUE)
 ```
+
+### In ggplot {-}
+
+To produce the same plot in `ggplot` we can utilise the `stat_function` geometry which draws a function over the plot.
+
+```{r}
+library(ggplot2)
+
+m = mean(iris$Petal.Length)
+s = sd(iris$Petal.Length)
+
+p1 = ggplot(iris, aes(x = Petal.Length)) + 
+  geom_histogram(aes(y = ..density..)) +
+  stat_function(fun = dnorm, args = list(mean = m, sd = s), colour="lightblue", size=2)
+p1
+```
+
 
 ```{r}
 # Produce Normal probabilities
@@ -48,3 +67,19 @@ pnorm(7, mean = mean(iris$Petal.Length), sd = sd(iris$Petal.Length))
 # Produce Normal quantiles
 qnorm(0.5, mean = mean(iris$Petal.Length), sd = sd(iris$Petal.Length))
 ```
+
+# Coding Challenge
+
+Create a normal model for the `Sepal.Length` variable from the `iris` data set and use this model to answer the following question. What percentage of the sample (to the nearest percent) would you expect to have a sepal length between 5 and 6.
+
+_Hint: You will need to use the `pnorm` function twice_ 
+
+## Solution {-}
+
+```{r}
+m = mean(iris$Sepal.Length)
+s = sd(iris$Sepal.Length)
+pnorm(6, m, s) - pnorm(5, m, s)
+
+```
+Answer: 42 percent
