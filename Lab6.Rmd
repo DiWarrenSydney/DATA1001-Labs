@@ -259,8 +259,8 @@ More Reading:
 
 Using the BAC data set, fit a polynomial model to the data of order 3. Next calculate the residuals of the fitted model to the data and plot them using `ggplot`. How many of the residuals are greater than 0.01?
 
-## Solution {-}
 
+<details><summary>Solution</summary>
 ```{r, message=F, warning=F}
 library(ggplot2)
 
@@ -278,6 +278,7 @@ ggplot(bac, aes(x=TimeHours, y=residuals)) + geom_point() + geom_line(aes(y = 0.
 sum(bac$residuals > 0.01)
 
 ```
+</details>
 
 
 

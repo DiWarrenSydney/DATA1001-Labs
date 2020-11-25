@@ -1706,14 +1706,14 @@ qnorm(0.5, mean = mean(iris$Petal.Length), sd = sd(iris$Petal.Length))</code></p
 <h1><span class="header-section-number">2</span> Coding Challenge</h1>
 <p>Create a normal model for the <code>Sepal.Length</code> variable from the <code>iris</code> data set and use this model to answer the following question. What percentage of the sample (to the nearest percent) would you expect to have a sepal length between 5 and 6.</p>
 <p><em>Hint: You will need to use the <code>pnorm</code> function twice</em></p>
-<div id="solution" class="section level2 unnumbered">
-<h2>Solution</h2>
+<details>
+<p><summary>Solution</summary></p>
 <pre class="r"><code>m = mean(iris$Sepal.Length)
 s = sd(iris$Sepal.Length)
 pnorm(6, m, s) - pnorm(5, m, s)</code></pre>
 <pre><code>## [1] 0.4207952</code></pre>
-<p>Answer: 42 percent</p>
-</div>
+Answer = 42%
+</details>
 </div>
 
 

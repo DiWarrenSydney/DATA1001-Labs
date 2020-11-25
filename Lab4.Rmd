@@ -74,12 +74,14 @@ Create a normal model for the `Sepal.Length` variable from the `iris` data set a
 
 _Hint: You will need to use the `pnorm` function twice_ 
 
-## Solution {-}
 
+<details><summary>Solution</summary>
 ```{r}
 m = mean(iris$Sepal.Length)
 s = sd(iris$Sepal.Length)
 pnorm(6, m, s) - pnorm(5, m, s)
 
 ```
-Answer: 42 percent
+Answer = 42%
+</details>
+

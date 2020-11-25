@@ -1843,8 +1843,8 @@ curve(47*exp(-0.06*x),3,50,add=T)</code></pre>
 <div id="coding-challenge" class="section level1">
 <h1><span class="header-section-number">5</span> Coding Challenge</h1>
 <p>Using the BAC data set, fit a polynomial model to the data of order 3. Next calculate the residuals of the fitted model to the data and plot them using <code>ggplot</code>. How many of the residuals are greater than 0.01?</p>
-<div id="solution" class="section level2 unnumbered">
-<h2>Solution</h2>
+<details>
+<p><summary>Solution</summary></p>
 <pre class="r"><code>library(ggplot2)
 
 # Produce the model
@@ -1860,7 +1860,7 @@ ggplot(bac, aes(x=TimeHours, y=residuals)) + geom_point() + geom_line(aes(y = 0.
 <pre class="r"><code># Alternate solution without plotting
 sum(bac$residuals &gt; 0.01)</code></pre>
 <pre><code>## [1] 2</code></pre>
-</div>
+</details>
 </div>
 
 
