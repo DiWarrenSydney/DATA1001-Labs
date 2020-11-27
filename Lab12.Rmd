@@ -29,4 +29,28 @@ h3 { /* Header 3 */
 
 We will demonstrate a chi-squared test and regression test.
 
+# Coding Challenge
 
+We will look at the `cats` data set from the `MASS` package. Using the `summary` function find the p-value of the T-test to test the slope of the variables `Hwt` (Heart Weight) against `Bwt` (Body Weight).
+
+<details><summary>Solution</summary>
+```{r, warning = F, message=F}
+library(MASS)
+library(tidyverse)
+
+model = lm(Hwt ~ Bwt, data = cats)
+
+# First check assumptions
+plot(model, which = 1:2)
+
+
+```
+
+
+The plots show that the assumptions for a linear model are okay. The residuals are homoscedastic and normally distributed.
+
+```{r}
+summary(model)   # Gives us the p-value
+```
+
+</details>

@@ -31,7 +31,7 @@ We will give a quick demo of the exercises below.
 
 <br>
 
-# `r icon::fa("pills")` Probiotic treatment for peanut allergy  
+#  Probiotic treatment for peanut allergy  
 
 Perform the same test as your Worksheet, in R, using the Sample **Sum**, and then Sample **Mean**.
 Check you understand the purpose of each line of code.
@@ -104,7 +104,7 @@ ts
 
 <br><br>
 
-# `r icon::fa("bitbucket")` Pepsi and Coke  
+# Pepsi and Coke  
 
 Perform the same test as your Worksheet, in R, using the Sample **Sum** and **Mean**.
 
@@ -176,7 +176,7 @@ ts
 
 <br><br>
 
-# `r icon::fa("uber")` Uber 
+# Uber 
 
 Perform the same test as your Worksheet, in R, using both the sample **Sum** and then **Mean**.
 
@@ -246,5 +246,21 @@ ts
 2*(pnorm(ts))   # 2 sided  # Note TS is negative.
 ```
 
+# Coding Challenge {-}
+
+Suppose we have a coin that we suspect is biased towards heads. Out of 30 tosses we had 21 heads. Using a simulation method with 1000 trials, find an approximate p-value where we have the following null and alternative hypotheses:
+$$H_0:P_{heads}\leq0.5$$
+$$H_1:P_{heads}>0.5$$
+Set the seed to 1 before starting the simulation using the code `set.seed(1)`
+
+<details><summary>Solution</summary>
+```{r}
+box = c(1,0)    # Box based on our null hypothesis
+
+totals = replicate(1000, sum(sample(box, 30, replace = TRUE)))   # Run 1000 trials of 30 coin tosses
+p_value = mean(totals >= 21)
+p_value
+```
+</details>
 
 
