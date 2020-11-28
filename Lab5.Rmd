@@ -197,3 +197,23 @@ library(tidyverse)
 olympics %>% filter(Year  > 1927)  %>% select(Year, Time, Gender) %>% ggplot(aes(x=Year, y = Time, colour = Gender)) + geom_point()
 ```
 
+<br>
+
+# Coding Challenge
+Using the `olympics` data with the filter function, determine how many women in the dataset are from Australia
+
+```{r}
+olympics %>% filter(Country == "AUS"& Gender == 'female')
+```
+
+Using a similar method how many athletes are from either Australia or Canada?
+Hint: Use the "|" operator within filter to mean "or"
+```{r}
+olympics %>% filter(Country == "AUS" | Country == 'CAN')
+```
+
+
+
+
+
+
