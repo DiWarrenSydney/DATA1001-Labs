@@ -1,7 +1,7 @@
 ---
 title: "DATA1001/1901 Lab7"
 subtitle: "Understanding Chance"
-author: "© University of Sydney 2020"
+author: "© University of Sydney 2021"
 output:
   html_document:
     theme: flatly
@@ -105,5 +105,20 @@ Simulate your net win/loss.
 ```{r}
 # Simulate the 5 throws of the biased dice
 ```
+
+# Coding Challenge
+
+Using the outcome of your 5 coin tosses, create a barplot in `ggplot`. Remember to give your plot an informative title and good axis labels.
+
+Hint: you must convert the `character` object of your sample to a dataframe using as.data.frasme() before using ggplot.
+
+```{r}
+library(ggplot2)
+set.seed(99)
+sample4 = sample(c("H", "T"), 5, replace = T,prob = c(0.2, 0.8))
+ggplot(as.data.frame(sample4), aes(x = sample4))+
+  geom_bar()
+```
+
 
 

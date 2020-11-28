@@ -1,7 +1,7 @@
 ---
 title: "DATA1001/1901 Lab5"
 subtitle: "Linear Model"
-author: "© University of Sydney 2020"
+author: "© University of Sydney 2021"
 output:
   html_document:
     theme: flatly
