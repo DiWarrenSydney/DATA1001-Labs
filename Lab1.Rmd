@@ -47,3 +47,8 @@ tail(iris)
 help(iris)
 ```
 
+# Coding Challenge
+Using the data() command, select another preloaded data set and use the techniques outlined above to explore the data.
+
+Hint: Select a dataset under 'Data sets in package ‘datasets’'
+

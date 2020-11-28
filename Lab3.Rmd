@@ -299,6 +299,19 @@ p3 + geom_boxplot()
 
 <br>
 
+# Coding Challenge
+
+Using `ggplot` create a barplot of crashes with `month` on the x axis (hint: You'll have to reorder the month variable similar to how we reordered the `DayWeek` Variable) and facet by gender.
+
+Which gender had the higher number of crashes? Is this what you expected?
+
+```{r}
+road1$Month = factor(road1$Month, levels=c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", 'November', 'December'))
+ggplot(road1, aes(x = Month))+
+geom_bar(aes(fill = Gender))+
+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
 # DATA1901 Extension (plotly)
 
 Here we introduce the cool interactive tool called `plotly`, which is automatically part of the `ggplot2` package.
