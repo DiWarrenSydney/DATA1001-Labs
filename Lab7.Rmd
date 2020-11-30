@@ -110,7 +110,7 @@ Simulate your net win/loss.
 
 Using the outcome of your 5 coin tosses, create a barplot in `ggplot`. Remember to give your plot an informative title and good axis labels.
 
-Hint: you must convert the `character` object of your sample to a dataframe using as.data.frasme() before using ggplot.
+Hint: you must convert the `character` object of your sample to a dataframe using as.data.frame() before using ggplot.
 
 ```{r}
 library(ggplot2)
