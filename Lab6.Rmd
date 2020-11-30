@@ -1,7 +1,7 @@
 ---
 title: "DATA1001/1901 Lab6"
 subtitle: "Linear Model"
-author: "© University of Sydney 2020"
+author: "© University of Sydney 2021"
 output:
   html_document:
     theme: flatly
@@ -257,8 +257,7 @@ More Reading:
 
 # Coding Challenge
 
-Using the BAC data set, fit a polynomial model to the data of order 3. Next calculate the residuals of the fitted model to the data and plot them using `ggplot`. How many of the residuals are greater than 0.01?
-
+Using the BAC data set, fit a polynomial model to the data of order 3. Use `BloodAlcoholConcentration` as your outcome variable (y) and `Timehours` as the predictor (x). Next calculate the residuals of the fitted model to the data and plot them using `ggplot`. How many of the residuals are greater than 0.01?
 
 <details><summary>Solution</summary>
 ```{r, message=F, warning=F}

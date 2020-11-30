@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="© University of Sydney 2020" />
+<meta name="author" content="© University of Sydney 2021" />
 
 
 <title>DATA1001/1901 Lab10</title>
@@ -1648,7 +1648,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">DATA1001/1901 Lab10</h1>
 <h3 class="subtitle">Hypothesis Testing: Proportion Test</h3>
-<h4 class="author">© University of Sydney 2020</h4>
+<h4 class="author">© University of Sydney 2021</h4>
 
 </div>
 
@@ -1860,7 +1860,8 @@ ts
 </div>
 <div id="coding-challenge" class="section level1 unnumbered">
 <h1>Coding Challenge</h1>
-<p>Suppose we have a coin that we suspect is biased towards heads. Out of 30 tosses we had 21 heads. Using a simulation method with 1000 trials, find an approximate p-value where we have the following null and alternative hypotheses: <span class="math display">\[H_0:P_{heads}\leq0.5\]</span> <span class="math display">\[H_1:P_{heads}&gt;0.5\]</span> Set the seed to 1 before starting the simulation using the code <code>set.seed(1)</code></p>
+<p>Suppose we have a coin that we suspect is biased towards heads. Out of 30 tosses we had 21 heads. Using a simulation method with 1000 trials, find an approximate p-value where we have the following null and alternative hypotheses: <span class="math display">\[H_0:P_{heads}\leq0.5\]</span> <span class="math display">\[H_1:P_{heads}&gt;0.5\]</span> Note: In this scenario, we chose a one sided alternative as we suspect the coin is biased towards <em>heads</em>. If we were unsure of the direction of bias, a two sided alternative hypothesis would be appropriate.</p>
+<p>Set the seed to 1 before starting the simulation using the code <code>set.seed(1)</code></p>
 <details>
 <p><summary>Solution</summary></p>
 <pre class="r"><code>box = c(1,0)    # Box based on our null hypothesis
@@ -1868,7 +1869,7 @@ ts
 totals = replicate(1000, sum(sample(box, 30, replace = TRUE)))   # Run 1000 trials of 30 coin tosses
 p_value = mean(totals &gt;= 21)
 p_value</code></pre>
-<pre><code>## [1] 0.022</code></pre>
+<pre><code>## [1] 0.024</code></pre>
 </details>
 </div>
 

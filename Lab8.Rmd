@@ -1,7 +1,7 @@
 ---
 title: "DATA1001/1901 Lab8"
 subtitle: "Chance Variability"
-author: "© University of Sydney 2020"
+author: "© University of Sydney 2021"
 output:
   html_document:
     theme: flatly
@@ -226,7 +226,7 @@ qqline(sreps, col="green")
 # Coding Challenge {-}
 
 ## Part 1 {-}
-Suppose we have a 10 sided dice and we throw it 20 times. Using an appropriate box model and a normal approximation, what is the approximate probability that the sum of the 20 throws is greater than 120? Use a continuity correction.
+Suppose we have a 10 sided dice and we toss it 20 times. Using an appropriate box model and a normal approximation, what is the approximate probability that the sum of the 20 throws is greater than 120? Use a continuity correction.
 
 <details><summary>Solution</summary>
 ```{r, warning=F, message=F}
