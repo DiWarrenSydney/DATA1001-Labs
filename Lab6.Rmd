@@ -224,37 +224,6 @@ For full code for fitting an exponential, see your [lecture notes](http://www.ma
 
 <br>
 
-# DATA1901 Extension
-
-## Windmark's Formula
-
-[Windmark's Formula](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4361698/) states that:
-\[ BAC = \frac{100A}{rW} − V t \]
-where
-
-- A = amount of alcohol consumed (in grams)
-- r = Windmark's factor, measuring the % of body mass that is water (women \approx 0.6; men \approx 0.7)
-- W = body mass (in grams)
-- V = rate at which the boy eliminates alcohol (eg V=0.015%)
-- t = time since commencing drinking (in hours)
-
-Assume:
-
-- the average Australian male [weighs 85.9kg](http://www.abs.gov.au/ausstats/abs@.nsf/Lookup/4338.0main+features212011-13) and drinks 2.5 beers in an hour. 
-- a beer contains 1.5 standard drinks, where a standard drink is 10g alcohol. 
-- a male drinks 4 beers in a short period of time.
-
-- Show the formula (to 3dp) for BAC is 
-\[ BAC = 0.100 - 0.015 t    \]
-
-- What is his BAC after 1 hour?
-
-- How long does it take for him to be legal to drive?
-
-More Reading:
-[BAC Formulae](http://www.kenderdinemathstutoring.com.au/downloads/3011085/BAC+formula+questioned+amended.pdf)
-[Modelling drugs](http://www.appstate.edu/~spruntwh/bac_ncctm.pdf)
-
 # Coding Challenge
 
 Using the BAC data set, fit a polynomial model to the data of order 3. Use `BloodAlcoholConcentration` as your outcome variable (y) and `Timehours` as the predictor (x). Next calculate the residuals of the fitted model to the data and plot them using `ggplot`. How many of the residuals are greater than 0.01?
@@ -298,6 +267,38 @@ bac$residuals2 = bac$predicted_values2 - bac$BloodAlcoholConcentration
 # Plot the residuals using ggplot and add a line at y = 0.01 to make it easy to see how many are above this line.
 ggplot(bac, aes(x=TimeHours)) + geom_point(aes(y = residuals), colour = "black") + geom_point(aes(y=residuals2), colour = "blue") + geom_line(aes(y = 0.01), colour="red")
 ```
+
+# DATA1901 Extension
+
+## Windmark's Formula
+
+[Windmark's Formula](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4361698/) states that:
+\[ BAC = \frac{100A}{rW} − V t \]
+where
+
+- A = amount of alcohol consumed (in grams)
+- r = Windmark's factor, measuring the % of body mass that is water (women \approx 0.6; men \approx 0.7)
+- W = body mass (in grams)
+- V = rate at which the boy eliminates alcohol (eg V=0.015%)
+- t = time since commencing drinking (in hours)
+
+Assume:
+
+- the average Australian male [weighs 85.9kg](http://www.abs.gov.au/ausstats/abs@.nsf/Lookup/4338.0main+features212011-13) and drinks 2.5 beers in an hour. 
+- a beer contains 1.5 standard drinks, where a standard drink is 10g alcohol. 
+- a male drinks 4 beers in a short period of time.
+
+- Show the formula (to 3dp) for BAC is 
+\[ BAC = 0.100 - 0.015 t    \]
+
+- What is his BAC after 1 hour?
+
+- How long does it take for him to be legal to drive?
+
+More Reading:
+[BAC Formulae](http://www.kenderdinemathstutoring.com.au/downloads/3011085/BAC+formula+questioned+amended.pdf)
+[Modelling drugs](http://www.appstate.edu/~spruntwh/bac_ncctm.pdf)
+
 
 
 
