@@ -73,7 +73,7 @@ Type of Data | Type of Graphical Summary | In base R |
 
 # Have a go in base R <i class="fas fa-car"></i>
 
-- Now you're ready to try some interesting data! Don't get bambozzled by all the code, rather see what everything does!
+- Now you're ready to try some interesting data! Don't get bamboozled by all the code, rather see what everything does!
 
 
 - Consider the Australian road fatalities from 1989 (a bigger version of the data used in Week 2 lectures). The data is sourced from [BITRE](https://bitre.gov.au/statistics/safety/fatal_road_crash_database.aspx).
@@ -189,7 +189,7 @@ boxplot(road$Age,horizontal=TRUE,col="red")
 
 ### Does biological sex affect the number of fatalities across age groups?
 
-- Here we consider **1 quantative variable divided by 1 qualitative variable**.
+- Here we consider **1 quantitative variable divided by 1 qualitative variable**.
 
 - Control for biological sex - ie consider fatalities by age divided by biological sex.
 ```{r}
@@ -219,7 +219,7 @@ Explore another variable.
 # Now try in ggplot
 
 
-1st, read through this [Overview](https://ggplot2.tidyverse.org/) and re-read RGuide 5.6.
+1st, read through this [Overview](https://ggplot2.tidyverse.org/) and re-read RGuide Chapter 5.
 
 2nd, load the package `ggplot2` or `tidyverse` (which includes `ggplot2`).
 
