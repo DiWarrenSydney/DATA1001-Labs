@@ -224,6 +224,50 @@ For full code for fitting an exponential, see your [lecture notes](http://www.ma
 
 <br>
 
+# Coding Challenge
+
+Using the BAC data set, fit a polynomial model to the data of order 3. Use `BloodAlcoholConcentration` as your outcome variable (y) and `Timehours` as the predictor (x). Next calculate the residuals of the fitted model to the data and plot them using `ggplot`. How many of the residuals are greater than 0.01?
+
+<details><summary>Solution</summary>
+```{r, message=F, warning=F}
+library(ggplot2)
+
+# Produce the model
+poly_model = lm(BloodAlcoholConcentration ~ poly(TimeHours, 3), data = bac)
+
+# Add the residuals to the bac data frame
+bac$predicted_values = predict(poly_model)
+bac$residuals = bac$predicted_values - bac$BloodAlcoholConcentration
+
+# Plot the residuals using ggplot and add a line at y = 0.01 to make it easy to see how many are above this line.
+ggplot(bac, aes(x=TimeHours, y = residuals)) + geom_point() + geom_line(aes(y = 0.01), colour="red")
+
+# Alternate solution without plotting
+sum(bac$residuals > 0.01)
+
+```
+</details>
+
+**Demonstration of raw vs orthogonal polynomials, remove from final version**
+
+```{r, message=F, warning=F}
+library(ggplot2)
+
+# Produce the model
+poly_model = lm(BloodAlcoholConcentration ~ poly(TimeHours, 3), data = bac)
+
+poly_model2 = lm(BloodAlcoholConcentration ~ poly(TimeHours, 3, raw=T), data = bac)
+
+# Add the residuals to the bac data frame
+bac$predicted_values = predict(poly_model)
+bac$predicted_values2 = predict(poly_model2)
+bac$residuals = bac$predicted_values - bac$BloodAlcoholConcentration
+bac$residuals2 = bac$predicted_values2 - bac$BloodAlcoholConcentration
+
+# Plot the residuals using ggplot and add a line at y = 0.01 to make it easy to see how many are above this line.
+ggplot(bac, aes(x=TimeHours)) + geom_point(aes(y = residuals), colour = "black") + geom_point(aes(y=residuals2), colour = "blue") + geom_line(aes(y = 0.01), colour="red")
+```
+
 # DATA1901 Extension
 
 ## Windmark's Formula
@@ -254,30 +298,6 @@ Assume:
 More Reading:
 [BAC Formulae](http://www.kenderdinemathstutoring.com.au/downloads/3011085/BAC+formula+questioned+amended.pdf)
 [Modelling drugs](http://www.appstate.edu/~spruntwh/bac_ncctm.pdf)
-
-# Coding Challenge
-
-Using the BAC data set, fit a polynomial model to the data of order 3. Use `BloodAlcoholConcentration` as your outcome variable (y) and `Timehours` as the predictor (x). Next calculate the residuals of the fitted model to the data and plot them using `ggplot`. How many of the residuals are greater than 0.01?
-
-<details><summary>Solution</summary>
-```{r, message=F, warning=F}
-library(ggplot2)
-
-# Produce the model
-poly_model = lm(BloodAlcoholConcentration ~ poly(TimeHours, 3), data = bac)
-
-# Add the residuals to the bac data frame
-bac$predicted_values = predict(poly_model)
-bac$residuals = bac$predicted_values - bac$BloodAlcoholConcentration
-
-# Plot the residuals using ggplot and add a line at y = 0.01 to make it easy to see how many are above this line.
-ggplot(bac, aes(x=TimeHours, y=residuals)) + geom_point() + geom_line(aes(y = 0.01), colour="red")
-
-# Alternate solution without plotting
-sum(bac$residuals > 0.01)
-
-```
-</details>
 
 
 

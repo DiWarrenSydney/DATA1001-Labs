@@ -103,7 +103,7 @@ Here's the rules of another game:
 Simulate your net win/loss.
 
 ```{r}
-# Simulate the 5 throws of the biased dice
+# Simulate the 5 throws of the biased coin
 ```
 
 # Coding Challenge
