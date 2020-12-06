@@ -80,7 +80,6 @@ _Hint: You will need to use the `pnorm` function twice_
 m = mean(iris$Sepal.Length)
 s = sd(iris$Sepal.Length)
 pnorm(6, m, s) - pnorm(5, m, s)
-
 ```
 Answer = 42%
 </details>

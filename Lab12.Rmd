@@ -45,8 +45,6 @@ model = lm(Hwt ~ Bwt, data = cats)
 
 # First check assumptions
 plot(model, which = 1:2)
-
-
 ```
 
 
