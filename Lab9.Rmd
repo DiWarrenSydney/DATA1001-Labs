@@ -85,3 +85,35 @@ col.ticks = "indianred1", col.axis = "indianred1")
 mtext("Z score", 1, line = 3.3, at = -2, col = "indianred1")
 ```
 
+# Coding Challenge {-}
+
+Using the same Oyster example from this week's lab video answer the following question: 
+
+**Using a bootstrap technique consisting of 5000 samples, what is the approximate probability of a sample of 500 oysters containing less than or equal to 150 pearls? Set the seed to 10 before creating the bootstrap sample using the code `set.seed(10)`.**
+
+_Recap on the lab video example: A sample of 800 oysters was taken from a population of 6000 oysters, and from that sample of 800, 250 of them contained pearls._
+
+<details><summary>Solution</summary>
+```{r}
+N = 6000 # Population size
+n = 800 # Sample size
+yes = 250 # Number of oysters from sample containing pearls
+no = n - yes
+
+# Scaling up
+pop_yes = yes * N/n
+pop_no = no * N/n
+
+# Box model
+box = c(rep(1, pop_yes), rep(0, pop_no))
+
+# Bootstrap samples
+set.seed(10)
+samples = replicate(5000, sum(sample(box, 500, replace = FALSE)))
+cumsum(table(samples)) # View cumulative table
+1410/5000 # Approximate probability using cumulative table
+
+# Alternate solution not using the cumulative table
+sum(samples <= 150)/5000 # Approximate probability of containing less than or equal to 150 pearls in sample of 500 oysters
+```
+
