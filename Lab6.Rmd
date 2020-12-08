@@ -226,7 +226,7 @@ For full code for fitting an exponential, see your [lecture notes](http://www.ma
 
 # Coding Challenge
 
-Using the BAC data set, fit a polynomial model to the data of order 3. Use `BloodAlcoholConcentration` as your outcome variable (y) and `Timehours` as the predictor (x). Next calculate the residuals of the fitted model to the data and plot them using `ggplot`. How many of the residuals are greater than 0.01?
+Using the BAC data set, fit a polynomial model to the data of order 3. Use `BloodAlcoholConcentration` as your outcome variable (y) and `TimeHours` as the predictor (x). Next calculate the residuals of the fitted model to the data and plot them using `ggplot`. How many of the residuals are greater than 0.01?
 
 <details><summary>Solution</summary>
 ```{r, message=F, warning=F}
