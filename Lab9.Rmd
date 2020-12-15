@@ -114,6 +114,6 @@ cumsum(table(samples)) # View cumulative table
 1410/5000 # Approximate probability using cumulative table
 
 # Alternate solution not using the cumulative table
-sum(samples <= 150)/5000 # Approximate probability of containing less than or equal to 150 pearls in sample of 500 oysters
+sum(samples <= 150)/5000 # Approximate probability of containing less than or equal to 150 pearls in sample of 5000 oysters
 ```
 
