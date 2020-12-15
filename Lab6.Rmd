@@ -237,7 +237,7 @@ poly_model = lm(BloodAlcoholConcentration ~ poly(TimeHours, 3), data = bac)
 
 # Add the residuals to the bac data frame
 bac$predicted_values = predict(poly_model)
-bac$residuals = bac$predicted_values - bac$BloodAlcoholConcentration
+bac$residuals = bac$BloodAlcoholConcentration - bac$predicted_values
 
 # Plot the residuals using ggplot and add a line at y = 0.01 to make it easy to see how many are above this line.
 ggplot(bac, aes(x=TimeHours, y = residuals)) + geom_point() + geom_line(aes(y = 0.01), colour="red")
