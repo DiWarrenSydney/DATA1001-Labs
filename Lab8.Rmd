@@ -222,31 +222,3 @@ sd(sreps)
 qqnorm(sreps, main=paste("QQ plot of Sums of size 1000"))
 qqline(sreps, col="green") 
 ```
-
-# Coding Challenge {-}
-
-## Part 1 {-}
-Suppose we have a 10 sided dice and we toss it 20 times. Using an appropriate box model and a normal approximation, what is the approximate probability that the sum of the 20 throws is greater than 120? Use a continuity correction.
-
-<details><summary>Solution</summary>
-```{r, warning=F, message=F}
-library(multicon)
-n = 20   # The number of throws
-box = c(1,2,3,4,5,6,7,8,9,10)   # Initialise the box
-se = popsd(box) * sqrt(n)    # Standard Error
-ev = mean(box) * n    # Expected Value
-
-pnorm(mean = ev, sd = se, 120.5, lower.tail = FALSE)
-```
-</details>
-
-## Part 2 {-}
-Now try to calculate the same probability using a simulation. Use the `replicate` function to run 1000 trials of the dice rolls and use these results to approximate the probability of throwing more than 120 in 20 rolls. Use the code `set.seed(10)` to set the seed to 10 before running the simulation to ensure that the results are consistent.
-
-<details><summary>Solution</summary>
-```{r}
-set.seed(10)   # Set the seed to 10
-totals = replicate(1000, sum(sample(box, 20, replace = TRUE))) # Conduct the simulation
-mean(totals > 120)    # Proportion of trials that are greater than 120
-```
-</details>

@@ -93,18 +93,4 @@ p2 + geom_bar()
 
 4. Experiment yourself.
 
-# Coding Challenge
 
-Using the `iris` data create a histogram of the `Petal.Length` variable using `ggplot` and the `geom_histogram` functions. Set the number of bins or columns in the plot to be 14 using the argument `bins=14` argument inside the `geom_histogram` function.
-
-What is the height of the largest column in the resulting plot?
-
-
-<details><summary>Solution</summary>
-```{r}
-library(ggplot2)
-ggplot(iris, aes(x=Petal.Length)) + geom_histogram(bins = 14)
-```
-
-Answer = 35
-</details>

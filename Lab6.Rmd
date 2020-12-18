@@ -224,30 +224,6 @@ For full code for fitting an exponential, see your [lecture notes](http://www.ma
 
 <br>
 
-# Coding Challenge
-
-Using the BAC data set, fit a polynomial model to the data of order 3. Use `BloodAlcoholConcentration` as your outcome variable (y) and `TimeHours` as the predictor (x). Next calculate the residuals of the fitted model to the data and plot them using `ggplot`. How many of the residuals are greater than 0.01?
-
-<details><summary>Solution</summary>
-```{r, message=F, warning=F}
-library(ggplot2)
-
-# Produce the model
-poly_model = lm(BloodAlcoholConcentration ~ poly(TimeHours, 3), data = bac)
-
-# Add the residuals to the bac data frame
-bac$predicted_values = predict(poly_model)
-bac$residuals = bac$BloodAlcoholConcentration - bac$predicted_values
-
-# Plot the residuals using ggplot and add a line at y = 0.01 to make it easy to see how many are above this line.
-ggplot(bac, aes(x=TimeHours, y = residuals)) + geom_point() + geom_line(aes(y = 0.01), colour="red")
-
-# Alternate solution without plotting
-sum(bac$residuals > 0.01)
-
-```
-</details>
-
 # DATA1901 Extension
 
 ## Windmark's Formula

@@ -1858,21 +1858,6 @@ ts
 # P: Calculate the p-value using the Normal mode for the Sample Sum (CLT).
 2*(pnorm(ts))   # 2 sided  # Note TS is negative.</code></pre>
 </div>
-<div id="coding-challenge" class="section level1 unnumbered">
-<h1>Coding Challenge</h1>
-<p>Suppose we have a coin that we suspect is biased towards heads. Out of 30 tosses we had 21 heads. Using a simulation method with 10000 trials, find an approximate p-value where we have the following null and alternative hypotheses: <span class="math display">\[H_0:P_{heads}\leq0.5\]</span> <span class="math display">\[H_1:P_{heads}&gt;0.5\]</span> Note: In this scenario, we chose a one sided alternative as we suspect the coin is biased towards <em>heads</em>. If we were unsure of the direction of bias, a two sided alternative hypothesis would be appropriate.</p>
-<p>Set the seed to 1 before starting the simulation using the code <code>set.seed(1)</code></p>
-<details>
-<p><summary>Solution</summary></p>
-<pre class="r"><code>box = c(1,0)    # Box based on our null hypothesis
-set.seed(1)     # Set the seed so the results are reproducible
-
-totals = replicate(10000, sum(sample(box, 30, replace = TRUE)))   # Run 1000 trials of 30 coin tosses
-p_value = mean(totals &gt;= 21)  # Proportion of trials where the results were as or more extreme than the observed results
-p_value</code></pre>
-<pre><code>## [1] 0.0218</code></pre>
-</details>
-</div>
 
 
 

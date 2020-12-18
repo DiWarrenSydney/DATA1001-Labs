@@ -1864,21 +1864,6 @@ olympics %&gt;% filter(Year  &gt; 1927)  %&gt;% select(Year, Time, Gender) %&gt;
 <p><br></p>
 </div>
 </div>
-<div id="coding-challenge" class="section level1">
-<h1><span class="header-section-number">4</span> Coding Challenge</h1>
-<p>Using the <code>olympics</code> data with the filter function, determine how many women in the dataset are from Australia</p>
-<pre class="r"><code>olympics %&gt;% filter(Country == &quot;AUS&quot;&amp; Gender == &#39;female&#39;)</code></pre>
-<pre><code>##   Year                X Time Country Gender X.1 X.2
-## 1 1952 Marjorie Jackson 11.5     AUS female  NA  NA
-## 2 1956   Betty Cuthbert 11.5     AUS female  NA  NA</code></pre>
-<p>Using a similar method how many athletes are from either Australia or Canada? Hint: Use the “|” operator within filter to mean “or”</p>
-<pre class="r"><code>olympics %&gt;% filter(Country == &quot;AUS&quot; | Country == &#39;CAN&#39;)</code></pre>
-<pre><code>##   Year                X  Time Country Gender X.1 X.2
-## 1 1928   Percy Williams 10.80     CAN   male  NA  NA
-## 2 1996   Donovan Bailey  9.84     CAN   male  NA  NA
-## 3 1952 Marjorie Jackson 11.50     AUS female  NA  NA
-## 4 1956   Betty Cuthbert 11.50     AUS female  NA  NA</code></pre>
-</div>
 
 
 

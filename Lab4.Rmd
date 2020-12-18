@@ -67,20 +67,3 @@ pnorm(7, mean = mean(iris$Petal.Length), sd = sd(iris$Petal.Length))
 # Produce Normal quantiles
 qnorm(0.5, mean = mean(iris$Petal.Length), sd = sd(iris$Petal.Length))
 ```
-
-# Coding Challenge
-
-Create a normal model for the `Sepal.Length` variable from the `iris` data set and use this model to answer the following question. What percentage of the sample (to the nearest percent) would you expect to have a sepal length between 5 and 6.
-
-_Hint: You will need to use the `pnorm` function twice_ 
-
-
-<details><summary>Solution</summary>
-```{r}
-m = mean(iris$Sepal.Length)
-s = sd(iris$Sepal.Length)
-pnorm(6, m, s) - pnorm(5, m, s)
-```
-Answer = 42%
-</details>
-
